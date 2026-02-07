@@ -1,0 +1,517 @@
+/* =============================================
+   Resonance Studio Berlin — Stylesheet
+   ============================================= */
+
+/* ---------- Font ---------- */
+@font-face {
+    font-family: 'Sulphur Point';
+    src: url('fonts/Sulphur_Point/SulphurPoint-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Sulphur Point';
+    src: url('fonts/Sulphur_Point/SulphurPoint-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Sulphur Point';
+    src: url('fonts/Sulphur_Point/SulphurPoint-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ---------- Custom Properties ---------- */
+:root {
+    --color-bg:       #110b0e;
+    --color-surface:  #1a1117;
+    --color-burgundy: rgb(147, 31, 50);
+    --color-burgundy-dark: rgb(118, 25, 40);
+    --color-gold:     rgb(180, 134, 85);
+    --color-cream:    rgb(248, 244, 234);
+    --color-beige:    rgb(214, 189, 160);
+
+    --font-main: 'Sulphur Point', 'Helvetica Neue', Arial, sans-serif;
+
+    --container-max: 1100px;
+    --section-pad: clamp(4rem, 10vh, 8rem);
+}
+
+/* ---------- Reset ---------- */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: var(--font-main);
+    font-weight: 300;
+    color: var(--color-cream);
+    background: var(--color-bg);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+address {
+    font-style: normal;
+}
+
+/* ---------- Utility ---------- */
+.container {
+    width: 90%;
+    max-width: var(--container-max);
+    margin: 0 auto;
+}
+
+.section {
+    padding: var(--section-pad) 0;
+}
+
+.section__heading {
+    font-weight: 700;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 2.5rem;
+    color: var(--color-cream);
+}
+
+/* ============================
+   NAV
+   ============================ */
+.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 0.8rem 0;
+    transition: background 0.4s, backdrop-filter 0.4s;
+}
+
+.nav--scrolled {
+    background: rgba(17, 11, 14, 0.55);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+.nav__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav__logo-link {
+    display: block;
+    line-height: 0;
+}
+
+.nav__logo {
+    height: 28px;
+    width: auto;
+    opacity: 0.85;
+    transition: opacity 0.3s;
+}
+
+.nav__logo-link:hover .nav__logo {
+    opacity: 1;
+}
+
+.nav__link {
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-beige);
+    opacity: 0.8;
+    transition: opacity 0.3s;
+}
+
+.nav__link:hover {
+    opacity: 1;
+}
+
+/* ============================
+   SCROLL REVEAL
+   ============================ */
+.reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ============================
+   HERO
+   ============================ */
+.hero {
+    position: relative;
+    height: 100vh;
+    height: 100svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.hero__image-wrap {
+    position: absolute;
+    inset: 0;
+}
+
+.hero__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+}
+
+.hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(17, 11, 14, 0.35) 0%,
+        rgba(17, 11, 14, 0.55) 50%,
+        rgba(17, 11, 14, 0.85) 100%
+    );
+}
+
+.hero__content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 0 1.5rem;
+    will-change: transform, opacity;
+}
+
+.hero__logo {
+    width: clamp(220px, 40vw, 420px);
+    margin: 0 auto 2rem;
+    filter: drop-shadow(0 2px 20px rgba(0, 0, 0, 0.5));
+}
+
+.hero__title {
+    /* Visually hidden — the logo conveys the name, but we keep the h1 for SEO */
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.hero__sub {
+    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    color: var(--color-beige);
+    text-shadow: 0 1px 12px rgba(0, 0, 0, 0.6);
+}
+
+.hero__scroll {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    translate: -50% 0;
+    z-index: 1;
+    color: var(--color-beige);
+    opacity: 0.6;
+    transition: opacity 0.3s;
+    animation: float 2.5s ease-in-out infinite;
+}
+.hero__scroll:hover {
+    opacity: 1;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+}
+
+/* ============================
+   ABOUT
+   ============================ */
+.about {
+    background: var(--color-bg);
+    text-align: center;
+}
+
+.about__text {
+    font-size: clamp(1.3rem, 3vw, 2rem);
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--color-beige);
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+/* ============================
+   LOCATION
+   ============================ */
+.location {
+    background: var(--color-surface);
+}
+
+.location__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+}
+
+@media (min-width: 700px) {
+    .location__grid {
+        grid-template-columns: 1.4fr 1fr;
+        align-items: start;
+    }
+}
+
+.location__map-wrap {
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid rgba(180, 134, 85, 0.15);
+}
+
+.location__map {
+    width: 100%;
+    height: 350px;
+}
+
+@media (min-width: 700px) {
+    .location__map {
+        height: 400px;
+    }
+}
+
+.location__address {
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.7;
+    color: var(--color-cream);
+    margin-bottom: 1.5rem;
+}
+
+.location__note {
+    font-size: 1rem;
+    color: var(--color-beige);
+    opacity: 0.8;
+}
+
+/* ============================
+   CONTACT
+   ============================ */
+.contact {
+    background: var(--color-bg);
+}
+
+.contact__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+}
+
+@media (min-width: 700px) {
+    .contact__grid {
+        grid-template-columns: 1.2fr 1fr;
+        align-items: start;
+    }
+}
+
+/* -- Form -- */
+.contact__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.form__honeypot {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.form__label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-beige);
+    margin-bottom: 0.4rem;
+}
+
+.form__input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-family: var(--font-main);
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--color-cream);
+    background: var(--color-surface);
+    border: 1px solid rgba(180, 134, 85, 0.2);
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.form__input:focus {
+    border-color: var(--color-gold);
+}
+
+.form__textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.form__button {
+    align-self: flex-start;
+    padding: 0.85rem 2.2rem;
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-cream);
+    background: var(--color-burgundy);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.15s;
+}
+
+.form__button:hover {
+    background: var(--color-burgundy-dark);
+}
+
+.form__button:active {
+    transform: scale(0.97);
+}
+
+.contact__status {
+    margin-top: 0.75rem;
+    font-size: 0.95rem;
+    color: var(--color-gold);
+    min-height: 1.5em;
+}
+
+/* -- Contact info -- */
+.contact__cta {
+    font-size: 1.1rem;
+    color: var(--color-beige);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.contact__email a {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--color-gold);
+    border-bottom: 1px solid rgba(180, 134, 85, 0.3);
+    transition: border-color 0.3s;
+}
+
+.contact__email a:hover {
+    border-color: var(--color-gold);
+}
+
+/* ============================
+   FOOTER
+   ============================ */
+.footer {
+    padding: 3rem 0;
+    background: var(--color-surface);
+    border-top: 1px solid rgba(180, 134, 85, 0.1);
+}
+
+.footer__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+}
+
+.footer__logo {
+    width: 160px;
+    opacity: 0.5;
+}
+
+.footer__copy {
+    font-size: 0.8rem;
+    color: var(--color-beige);
+    opacity: 0.4;
+    letter-spacing: 0.05em;
+}
+
+/* ============================
+   LEAFLET OVERRIDES
+   ============================ */
+.leaflet-container {
+    background: var(--color-surface) !important;
+    font-family: var(--font-main) !important;
+}
+
+.leaflet-popup-content-wrapper {
+    background: var(--color-surface) !important;
+    color: var(--color-cream) !important;
+    border-radius: 6px !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+    font-family: var(--font-main) !important;
+}
+
+.leaflet-popup-tip {
+    background: var(--color-surface) !important;
+}
+
+.leaflet-popup-content {
+    font-size: 0.9rem !important;
+    line-height: 1.5 !important;
+}
+
+/* Dark map tile filter */
+.location__map .leaflet-tile-pane {
+    filter: brightness(0.7) contrast(1.15) saturate(0.25) sepia(0.35) hue-rotate(330deg);
+}
+
+/* Attribution styling */
+.leaflet-control-attribution {
+    background: rgba(17, 11, 14, 0.7) !important;
+    color: rgba(214, 189, 160, 0.5) !important;
+    font-size: 0.65rem !important;
+}
+
+.leaflet-control-attribution a {
+    color: rgba(214, 189, 160, 0.6) !important;
+}
