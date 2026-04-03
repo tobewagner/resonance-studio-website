@@ -100,6 +100,11 @@
     box-sizing: border-box;
 }
 
+html, body {
+    overflow-x: hidden;
+    overscroll-behavior-x: none;
+}
+
 html {
     font-size: 21px;
     scroll-behavior: smooth;
@@ -113,7 +118,8 @@ body {
     color: var(--color-text);
     background: var(--color-bg);
     line-height: 1.6;
-    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
 }
 
 img {
@@ -982,14 +988,23 @@ body.loaded .anim-fade-in-late {
 .gallery__item {
     position: relative;
     border-radius: 14px;
-    background: var(--color-bg);
-    z-index: 0;
     break-inside: avoid;
     margin-bottom: 20px;
 }
 
-/* Ripple glow — on the image itself so shadow matches exactly */
-.gallery__item:hover .gallery__img {
+/* Ripple glow placeholder — z-index:-1 so ALL images sit above ALL glows */
+.gallery__item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+    z-index: -2;
+    pointer-events: none;
+    transition: transform 0.8s var(--ease-out-expo);
+}
+
+.gallery__item:hover::before {
+    transform: scale(1.03);
     animation: ripple-glow-dark 1.8s ease-out forwards;
 }
 
@@ -1012,7 +1027,7 @@ body.loaded .anim-fade-in-late {
     }
 }
 
-[data-theme="light"] .gallery__item:hover .gallery__img {
+[data-theme="light"] .gallery__item:hover::before {
     animation: ripple-glow-light 1.8s ease-out forwards;
 }
 
@@ -1036,6 +1051,8 @@ body.loaded .anim-fade-in-late {
 }
 
 .gallery__img {
+    position: relative;
+    z-index: 5;
     width: 100%;
     height: auto;
     display: block;
