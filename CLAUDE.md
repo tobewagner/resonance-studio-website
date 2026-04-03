@@ -4,25 +4,47 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Static single-page website for **Resonance Studio Berlin**, a recording/mixing/mastering studio in Friedrichshain, Berlin. No build tools, bundlers, or frameworks — just vanilla HTML/CSS/JS served directly.
+Static single-page website for **Resonance Studio Berlin**, a recording/mixing/mastering studio in Friedrichshain, Berlin. Vanilla HTML/CSS/JS, no build tools or frameworks.
 
 ## Development
 
-Open `index.html` in a browser. No build step, no dev server required. Any static file server works (e.g. `python -m http.server` or VS Code Live Server).
+- **Local**: Open `index.html` in a browser. No build step.
+- **Dev server**: `http://192.168.1.16:8081` — deploy via `scp` to `/var/www/resonance-studio/` on `fuzzypoker_dev`. Own nginx server block on port 8081, completely separate from fuzzypoker.
+- **Branch**: `feature/redesign` (local only, not pushed)
 
 ## Architecture
 
-- **index.html** — Single-page structure with sections: nav, hero, about, location (Leaflet map), contact form, footer. Uses JSON-LD structured data for SEO.
-- **styles.css** — All styles in one file. Uses CSS custom properties defined in `:root` for the color palette (dark bg, burgundy, gold, cream/beige). Responsive via `clamp()` and media queries at `700px`. Includes Leaflet map overrides with dark-themed filters.
-- **main.js** — IIFE with: email obfuscation (anti-scraper assembly), Leaflet map init with custom SVG marker, hero parallax on scroll, IntersectionObserver scroll-reveal, navbar background toggle, and Formspree contact form submission via fetch.
+- **index.html** — Sections: nav, hero, about, services, studio, gallery, client marquee, location (Leaflet map), contact form, footer. Wave dividers between sections. JSON-LD structured data. Light/dark theme via `data-theme` on `<html>`. Both logo variants (red/beige) with CSS class switching.
+- **styles.css** — CSS custom properties with light/dark theme (`[data-theme="light"]` / `[data-theme="dark"]`). System preference detection via `prefers-color-scheme`. Responsive via `clamp()` and media queries at `550px`, `700px`, `900px`. Gallery uses CSS columns masonry.
+- **main.js** — IIFE: theme toggle (localStorage + cookie + system preference), email obfuscation, Leaflet map, hero parallax, IntersectionObserver scroll-reveal (also triggers wave divider animations), mobile menu, Formspree contact form.
+- **lang-switcher.js** — Client-side i18n: loads `lang/strings.json`, detects language (URL param > cookie > localStorage > browser), swaps `[data-i18n]` text content. 26 languages. Cookie persistence (1 year).
+- **lang/strings.json** — All translations. Flat key-value per language. 42 keys per language.
 
 ## External Dependencies
 
-- **Leaflet 1.9.4** — loaded via CDN (unpkg) for the location map
-- **Formspree** — contact form backend (action URL placeholder `YOUR_FORM_ID` needs replacing)
+- **Leaflet 1.9.4** — CDN (unpkg) for location map
+- **Formspree** — contact form backend (`YOUR_FORM_ID` placeholder)
+- **flagcdn.com** — flag images for language switcher
 
 ## Design System
 
-- **Font**: Sulphur Point (Light 300, Regular 400, Bold 700) — self-hosted TTF files in `fonts/`
-- **Colors**: `--color-bg` (dark), `--color-surface` (slightly lighter dark), `--color-burgundy` (accent), `--color-gold` (links/highlights), `--color-cream`/`--color-beige` (text)
-- **Domain**: studio-resonance.net (referenced in canonical URL and OG tags)
+- **Font**: Sulphur Point (Light 300, Regular 400, Bold 700) — self-hosted TTF in `fonts/`. **MUST be used for ALL text. No other fonts. No italic variant exists.**
+- **Color palette** (Resonance Color Space):
+  - Warm: `#A47A4D` `#B48655` `#D6BDA0` `#F8F4EA` `#E7D9C5`
+  - Reds: `#701321` `#871626` `#9D192A` `#C91F32`
+- **Dark mode**: bg `#701321`, surface `#871626` (alternating), beige logo. Wave divider colors: `#761423` `#7C1524` `#821625`
+- **Light mode**: bg `#F8F4EA`, surface `#E7D9C5` (alternating), red logo. Wave divider colors: `#ECE0CF` `#F0E7D8` `#F4EEE1`
+- **Wave dividers**: 3-layer organic SVG curves between sections. Overlap hero image at bottom. Scroll-triggered fade-in + breathe animation.
+- **Gallery**: 60vw on desktop, 92vw on mobile. Masonry columns. Ripple glow: cream (#F8F4EA) on dark, burgundy on light.
+- **Gallery ripple**: `box-shadow` rings on hover, expands outward, fades out (no loop)
+
+## Brand Info
+
+- **Domain**: studio-resonance.net
+- **Instagram**: @resonancestudioberlin
+- **Contact**: resonance.studio.berlin@gmail.com
+- **Studio Manager**: Matteo Hoyer
+- **Studio built by**: Smart Audio GmbH (Christian Baumgarten), Hamburg — smart-audio.de
+- **Logos**: `images/SRB-Logo-MH8b-full-beige.svg` (dark bg) / `images/SRB-Logo-MH8b-full-red.svg` (light bg)
+- **Gallery photos**: `images/gallery/` (WebP, auto-rotated from EXIF)
+- **Source assets**: `file_pool/` (not deployed)

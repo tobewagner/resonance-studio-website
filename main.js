@@ -5,6 +5,31 @@
 (function () {
     'use strict';
 
+    /* ---------- Theme (light/dark) ---------- */
+    var root = document.documentElement;
+    var themeBtn = document.getElementById('theme-toggle');
+
+    function getPreferredTheme() {
+        var stored = localStorage.getItem('theme');
+        if (stored) return stored;
+        return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    }
+
+    function applyTheme(theme) {
+        root.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+    }
+
+    // Apply immediately to prevent flash
+    applyTheme(getPreferredTheme());
+
+    if (themeBtn) {
+        themeBtn.addEventListener('click', function () {
+            var current = root.getAttribute('data-theme') || 'dark';
+            applyTheme(current === 'dark' ? 'light' : 'dark');
+        });
+    }
+
     /* ---------- Page loaded state ---------- */
     // Triggers hero entrance animations via CSS
     window.addEventListener('load', function () {
@@ -69,7 +94,7 @@
     var markerIcon = L.divIcon({
         className: 'map-marker',
         html: '<svg width="32" height="44" viewBox="0 0 32 44" fill="none" xmlns="http://www.w3.org/2000/svg">' +
-              '<path d="M16 0C7.164 0 0 7.164 0 16c0 12 16 28 16 28s16-16 16-28C32 7.164 24.836 0 16 0z" fill="rgb(147,31,50)"/>' +
+              '<path d="M16 0C7.164 0 0 7.164 0 16c0 12 16 28 16 28s16-16 16-28C32 7.164 24.836 0 16 0z" fill="#9D192A"/>' +
               '<circle cx="16" cy="15" r="6" fill="rgb(248,244,234)"/>' +
               '</svg>',
         iconSize: [32, 44],
@@ -102,7 +127,7 @@
     window.addEventListener('scroll', onScroll, { passive: true });
 
     /* ---------- Scroll reveal ---------- */
-    var reveals = document.querySelectorAll('.reveal');
+    var reveals = document.querySelectorAll('.reveal, .wave-divider');
 
     if ('IntersectionObserver' in window) {
         var revealObserver = new IntersectionObserver(function (entries) {
@@ -112,7 +137,7 @@
                     revealObserver.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
 
         reveals.forEach(function (el) { revealObserver.observe(el); });
     } else {
