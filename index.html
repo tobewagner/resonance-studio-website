@@ -6,7 +6,7 @@
     <title>Resonance Studio Berlin — Recording, Mixing & Mastering</title>
     <meta name="description" content="Recording, mixing and mastering studio in Friedrichshain, Berlin. Professional acoustic treatment, vintage and modern microphones, control room and live room in the heart of Boxi Kiez near Boxhagener Platz.">
 
-    <!-- Canonical — replace with your actual domain -->
+    <!-- Canonical -->
     <link rel="canonical" href="https://studio-resonance.net/">
 
     <!-- Open Graph -->
@@ -25,7 +25,7 @@
     <meta name="twitter:image" content="https://studio-resonance.net/images/RSB-interior1-edit1-IMG_8756.jpg">
 
     <!-- Misc -->
-    <meta name="theme-color" content="#110b0e">
+    <meta name="theme-color" content="#0d0a0c">
     <meta name="robots" content="index, follow">
 
     <!-- JSON-LD Structured Data -->
@@ -55,18 +55,27 @@
             "name": "Berlin"
         },
         "knowsLanguage": ["en", "de"],
-        "additionalType": "https://schema.org/MusicVenue"
+        "additionalType": "https://schema.org/MusicVenue",
+        "sameAs": [
+            "https://www.instagram.com/resonancestudioberlin/"
+        ]
     }
     </script>
 
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="styles.css">
 
-    <!-- Leaflet CSS for the map -->
+    <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
           integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
           crossorigin="">
 
-    <!-- Preload hero image -->
+    <!-- Preload hero image (WebP with JPG fallback) -->
+    <link rel="preload" as="image" href="images/RSB-interior1-edit1-IMG_8756.webp" type="image/webp">
     <link rel="preload" as="image" href="images/RSB-interior1-edit1-IMG_8756.jpg">
 </head>
 <body>
@@ -75,57 +84,202 @@
     <nav class="nav" id="nav">
         <div class="container nav__inner">
             <a href="#hero" class="nav__logo-link">
-                <img
-                    src="images/SRB-Logo-MH8b-full-beige.svg"
-                    alt="Resonance Studio Berlin — back to top"
-                    class="nav__logo"
-                >
+                <img src="images/SRB-Logo-MH8b-full-beige.svg"
+                     alt="Resonance Studio Berlin — back to top"
+                     class="nav__logo">
             </a>
-            <a href="#contact" class="nav__link">Contact</a>
+            <div class="nav__links" id="nav-links">
+                <a href="#about" class="nav__link">About</a>
+                <a href="#services" class="nav__link">Services</a>
+                <a href="#studio" class="nav__link">Studio</a>
+                <a href="#gallery" class="nav__link">Gallery</a>
+                <a href="#contact" class="nav__link">Contact</a>
+            </div>
+            <button class="nav__burger" id="nav-burger" aria-label="Open menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
+
+    <!-- ====== MOBILE MENU ====== -->
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-menu__inner">
+            <a href="#about" class="mobile-menu__link">About</a>
+            <a href="#services" class="mobile-menu__link">Services</a>
+            <a href="#studio" class="mobile-menu__link">Studio</a>
+            <a href="#gallery" class="mobile-menu__link">Gallery</a>
+            <a href="#location" class="mobile-menu__link">Location</a>
+            <a href="#contact" class="mobile-menu__link">Contact</a>
+        </div>
+    </div>
 
     <!-- ====== HERO ====== -->
     <section class="hero" id="hero">
         <div class="hero__image-wrap">
-            <img
-                src="images/RSB-interior1-edit1-IMG_8756.jpg"
-                alt="Resonance Studio Berlin control room with studio monitors, acoustic ceiling panels, mixing desk, and window looking into the live recording room"
-                class="hero__image"
-            >
+            <picture>
+                <source srcset="images/RSB-interior1-edit1-IMG_8756.webp" type="image/webp">
+                <img src="images/RSB-interior1-edit1-IMG_8756.jpg"
+                     alt="Resonance Studio Berlin control room with studio monitors, acoustic ceiling panels, mixing desk, and window looking into the live recording room"
+                     class="hero__image">
+            </picture>
             <div class="hero__overlay"></div>
         </div>
         <div class="hero__content">
-            <img
-                src="images/SRB-Logo-MH8b-full-beige.svg"
-                alt="Resonance Studio Berlin logo"
-                class="hero__logo"
-            >
+            <img src="images/SRB-Logo-MH8b-full-beige.svg"
+                 alt="Resonance Studio Berlin logo"
+                 class="hero__logo anim-fade-in">
             <h1 class="hero__title">Resonance Studio Berlin</h1>
-            <p class="hero__sub">Recording, Mixing &amp; Mastering in the heart of Friedrichshain</p>
+            <div class="hero__rule anim-draw"></div>
+            <p class="hero__sub anim-fade-up">Recording, Mixing &amp; Mastering<br>in the heart of Friedrichshain</p>
         </div>
-        <a href="#about" class="hero__scroll" aria-label="Scroll down">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <a href="#about" class="hero__scroll anim-fade-in-late" aria-label="Scroll down">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="6 9 12 15 18 9"></polyline>
             </svg>
         </a>
     </section>
 
     <!-- ====== ABOUT ====== -->
-    <section class="section about reveal" id="about">
+    <section class="section about" id="about">
         <div class="container">
-            <p class="about__text">
-                Located minutes from the vibrant Boxi Kiez and public transportation.
-                Our mics range from vintage warmth to modern sparkle.
-            </p>
+            <div class="reveal">
+                <span class="section__label">About</span>
+                <p class="about__text">
+                    A creative space built for sound — professional acoustic treatment,
+                    a curated collection of vintage and modern microphones, and the
+                    analog warmth that digital alone can't replicate.
+                </p>
+                <p class="about__text about__text--secondary">
+                    Located minutes from Boxhagener Platz in the vibrant Boxi Kiez,
+                    Resonance Studio Berlin offers an environment where music is
+                    captured with character and intention.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== SERVICES ====== -->
+    <section class="section services" id="services">
+        <div class="container">
+            <span class="section__label reveal">Services</span>
+            <div class="services__grid">
+                <article class="service-card reveal">
+                    <span class="service-card__number">01</span>
+                    <div class="service-card__rule"></div>
+                    <h3 class="service-card__title">Recording</h3>
+                    <p class="service-card__desc">
+                        From intimate solo sessions to full band tracking. Our control
+                        room and live room are designed for pristine capture with character.
+                    </p>
+                </article>
+                <article class="service-card service-card--offset reveal">
+                    <span class="service-card__number">02</span>
+                    <div class="service-card__rule"></div>
+                    <h3 class="service-card__title">Mixing</h3>
+                    <p class="service-card__desc">
+                        Balancing art and precision. We shape your recordings into
+                        cohesive, powerful mixes that translate across every system.
+                    </p>
+                </article>
+                <article class="service-card reveal">
+                    <span class="service-card__number">03</span>
+                    <div class="service-card__rule"></div>
+                    <h3 class="service-card__title">Mastering</h3>
+                    <p class="service-card__desc">
+                        The final polish. Loudness, clarity, and consistency —
+                        prepared for streaming, vinyl, or any format you need.
+                    </p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== STUDIO ====== -->
+    <section class="section studio" id="studio">
+        <div class="studio__image-wrap reveal">
+            <img src="images/gallery/IMG_9083.webp"
+                 alt="ON AIR sign glowing beside the window into the Resonance Studio Berlin live room"
+                 class="studio__image">
+        </div>
+        <div class="container">
+            <div class="studio__content reveal">
+                <span class="section__label">The Studio</span>
+                <h2 class="studio__heading">Two rooms.<br>One vision.</h2>
+                <div class="studio__details">
+                    <div class="studio__room">
+                        <h4 class="studio__room-title">Control Room</h4>
+                        <p class="studio__room-desc">
+                            Precision monitoring, acoustically treated surfaces, and a workflow
+                            built for focus. Where every mix decision matters.
+                        </p>
+                    </div>
+                    <div class="studio__room">
+                        <h4 class="studio__room-title">Live Room</h4>
+                        <p class="studio__room-desc">
+                            Natural reverb, proper isolation, and room to breathe.
+                            Designed for artists who want their sound captured honestly.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== GALLERY ====== -->
+    <section class="section gallery" id="gallery">
+        <div class="container">
+            <span class="section__label reveal">Gallery</span>
+            <div class="gallery__grid">
+                <figure class="gallery__item gallery__item--wide reveal">
+                    <img src="images/gallery/IMG_8742.webp"
+                         alt="Live room overview — upright piano, burgundy carpet, acoustic panels and warm recessed lighting"
+                         class="gallery__img" loading="lazy">
+                </figure>
+                <figure class="gallery__item gallery__item--tall reveal">
+                    <img src="images/gallery/IMG_9117.webp"
+                         alt="Large diaphragm condenser microphone in the live room with burgundy acoustic ceiling"
+                         class="gallery__img" loading="lazy">
+                </figure>
+                <figure class="gallery__item reveal">
+                    <img src="images/gallery/IMG_9070.webp"
+                         alt="Engineer at the DAW during a mixing session"
+                         class="gallery__img" loading="lazy">
+                </figure>
+                <figure class="gallery__item reveal">
+                    <img src="images/gallery/IMG_9046.webp"
+                         alt="Vintage Scott turntable and amplifier in the studio"
+                         class="gallery__img" loading="lazy">
+                </figure>
+                <figure class="gallery__item gallery__item--wide reveal">
+                    <img src="images/gallery/IMG_9140.webp"
+                         alt="Live room showing burgundy acoustic panels, wood ceiling, and window to the control room"
+                         class="gallery__img" loading="lazy">
+                </figure>
+                <figure class="gallery__item gallery__item--tall reveal">
+                    <img src="images/gallery/IMG_9122.webp"
+                         alt="Austrian Audio microphone in the live room with piano and window to control room"
+                         class="gallery__img" loading="lazy">
+                </figure>
+                <figure class="gallery__item reveal">
+                    <img src="images/gallery/IMG_9513.webp"
+                         alt="Control room workstation — studio monitors, MIDI keyboard, and dual screens"
+                         class="gallery__img" loading="lazy">
+                </figure>
+                <figure class="gallery__item reveal">
+                    <img src="images/gallery/IMG_9496.webp"
+                         alt="Neumann small diaphragm condenser microphone close-up"
+                         class="gallery__img" loading="lazy">
+                </figure>
+            </div>
         </div>
     </section>
 
     <!-- ====== LOCATION ====== -->
-    <section class="section location reveal" id="location">
+    <section class="section location" id="location">
         <div class="container">
-            <h2 class="section__heading">Location</h2>
-            <div class="location__grid">
+            <span class="section__label reveal">Location</span>
+            <div class="location__grid reveal">
                 <div class="location__map-wrap">
                     <div id="map" class="location__map"></div>
                 </div>
@@ -135,8 +289,11 @@
                         10245 Berlin<br>
                         Hinterhof 2
                     </address>
+                    <div class="location__rule"></div>
                     <p class="location__note">
-                        In the heart of Friedrichshain — a rare find for a recording studio in central Berlin.
+                        In the heart of Friedrichshain — a rare find
+                        for a recording studio in central Berlin.
+                        Steps from Boxhagener Platz and public transport.
                     </p>
                 </div>
             </div>
@@ -144,50 +301,70 @@
     </section>
 
     <!-- ====== CONTACT & BOOKING ====== -->
-    <section class="section contact reveal" id="contact">
+    <section class="section contact" id="contact">
         <div class="container">
-            <h2 class="section__heading">Contact &amp; Booking</h2>
+            <span class="section__label reveal">Contact &amp; Booking</span>
             <div class="contact__grid">
-                <div class="contact__form-wrap">
-                    <form
-                        action="https://formspree.io/f/YOUR_FORM_ID"
-                        method="POST"
-                        class="contact__form"
-                        id="contact-form"
-                    >
-                        <!-- Honeypot field — hidden from humans, traps bots -->
+                <div class="contact__form-wrap reveal">
+                    <form action="https://formspree.io/f/YOUR_FORM_ID"
+                          method="POST"
+                          class="contact__form"
+                          id="contact-form">
+                        <!-- Honeypot -->
                         <div class="form__honeypot" aria-hidden="true">
                             <label for="website">Website</label>
                             <input type="text" name="website" id="website" tabindex="-1" autocomplete="off">
                         </div>
 
                         <div class="form__group">
+                            <input type="text" name="name" id="name" class="form__input" placeholder=" " required>
                             <label for="name" class="form__label">Name</label>
-                            <input type="text" name="name" id="name" class="form__input" required>
+                            <div class="form__line"></div>
                         </div>
 
                         <div class="form__group">
+                            <input type="email" name="email" id="email" class="form__input" placeholder=" " required>
                             <label for="email" class="form__label">Email</label>
-                            <input type="email" name="email" id="email" class="form__input" required>
+                            <div class="form__line"></div>
                         </div>
 
                         <div class="form__group">
+                            <textarea name="message" id="message" class="form__input form__textarea" rows="5" placeholder=" " required></textarea>
                             <label for="message" class="form__label">Message</label>
-                            <textarea name="message" id="message" class="form__input form__textarea" rows="5" required></textarea>
+                            <div class="form__line"></div>
                         </div>
 
-                        <button type="submit" class="form__button">Send Message</button>
+                        <button type="submit" class="form__button">
+                            <span>Send Message</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </button>
                     </form>
                     <p class="contact__status" id="form-status"></p>
                 </div>
-                <div class="contact__info">
+                <div class="contact__info reveal">
                     <p class="contact__cta">
-                        Interested in booking a session or have a question?<br>
-                        Reach out via the form or drop us an email.
+                        Interested in booking a session<br>
+                        or have a question?
+                    </p>
+                    <p class="contact__detail">
+                        Reach out via the form or drop us an email directly.
                     </p>
                     <p class="contact__email" id="email-link">
                         <!-- Email inserted via JS to deter scrapers -->
                     </p>
+                    <div class="contact__social">
+                        <a href="https://www.instagram.com/resonancestudioberlin/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Resonance Studio Berlin on Instagram">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg>
+                            <span>resonancestudioberlin</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -196,11 +373,26 @@
     <!-- ====== FOOTER ====== -->
     <footer class="footer">
         <div class="container footer__inner">
-            <img
-                src="images/SRB-Logo-MH8b-full-beige.svg"
-                alt="Resonance Studio Berlin"
-                class="footer__logo"
-            >
+            <div class="footer__top">
+                <img src="images/SRB-Logo-MH8b-full-beige.svg"
+                     alt="Resonance Studio Berlin"
+                     class="footer__logo">
+                <div class="footer__nav">
+                    <a href="#about" class="footer__link">About</a>
+                    <a href="#services" class="footer__link">Services</a>
+                    <a href="#studio" class="footer__link">Studio</a>
+                    <a href="#gallery" class="footer__link">Gallery</a>
+                    <a href="#contact" class="footer__link">Contact</a>
+                    <a href="https://www.instagram.com/resonancestudioberlin/" target="_blank" rel="noopener noreferrer" class="footer__link" aria-label="Instagram">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer__rule"></div>
             <p class="footer__copy">&copy; 2026 Resonance Studio Berlin</p>
         </div>
     </footer>
