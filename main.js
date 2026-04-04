@@ -147,6 +147,39 @@
     (scroller || window).addEventListener('scroll', onScroll, { passive: true });
     onScroll();
 
+    /* ---------- Gallery masonry columns ---------- */
+    var galleryGrid = document.querySelector('.gallery__grid');
+    if (galleryGrid) {
+        var galleryItems = Array.prototype.slice.call(galleryGrid.querySelectorAll('.gallery__item'));
+        var galleryCols = 0;
+
+        function galleryLayout() {
+            var cols = window.innerWidth >= 700 ? 3 : 2;
+            if (cols === galleryCols) return;
+            galleryCols = cols;
+
+            // Remove existing column divs
+            galleryGrid.innerHTML = '';
+
+            // Create column containers
+            var colDivs = [];
+            for (var c = 0; c < cols; c++) {
+                var col = document.createElement('div');
+                col.className = 'gallery__col';
+                galleryGrid.appendChild(col);
+                colDivs.push(col);
+            }
+
+            // Distribute items round-robin
+            for (var i = 0; i < galleryItems.length; i++) {
+                colDivs[i % cols].appendChild(galleryItems[i]);
+            }
+        }
+
+        galleryLayout();
+        window.addEventListener('resize', galleryLayout);
+    }
+
     /* ---------- Scroll reveal ---------- */
     var reveals = document.querySelectorAll('.reveal, .wave-divider');
 

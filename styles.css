@@ -923,28 +923,28 @@ body.loaded .anim-fade-in-late {
     background: var(--color-surface);
 }
 
-/* Masonry layout — images flow at natural aspect ratios */
+/* Masonry gallery — flex columns, JS-distributed, top-aligned */
 .gallery__grid {
-    columns: 2;
-    column-gap: 20px;
-    width: 92vw;
-    max-width: none;
-    margin: 0 auto;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    width: 100%;
 }
 
-@media (min-width: 700px) {
-    .gallery__grid {
-        columns: 3;
-        column-gap: 20px;
-        width: 60vw;
-    }
+.gallery__col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 0;
 }
 
 .gallery__item {
     position: relative;
     border-radius: 14px;
-    break-inside: avoid;
-    margin-bottom: 20px;
+    margin: 0;
+    padding: 0;
+    display: block;
 }
 
 /* Ripple glow placeholder — z-index:-1 so ALL images sit above ALL glows */
