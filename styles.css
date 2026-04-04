@@ -37,16 +37,16 @@
     --color-bg:              #701321;
     --color-bg-rgb:          112, 19, 33;
     --color-surface:         #871626;
-    --color-surface-2:       #9D192A;
+
     --color-text:            #F8F4EA;
     --color-text-secondary:  #D6BDA0;
     --color-burgundy:        #9D192A;
     --color-burgundy-dark:   #701321;
-    --color-burgundy-bright: #C91F32;
+
     --color-burgundy-glow:   rgba(157, 25, 42, 0.15);
     --color-gold:            #B48655;
     --color-gold-dim:        rgba(180, 134, 85, 0.25);
-    --color-brown:           #A47A4D;
+
     --color-cream:           #F8F4EA;
     --color-beige:           #D6BDA0;
     --color-muted:           #A47A4D;
@@ -64,7 +64,7 @@
     --color-bg:              #F8F4EA;
     --color-bg-rgb:          248, 244, 234;
     --color-surface:         #E7D9C5;
-    --color-surface-2:       #DDD0B8;
+
     --color-text:            #701321;
     --color-text-secondary:  #9D192A;
     --color-cream:           #701321;
@@ -72,23 +72,6 @@
     --color-muted:           #A47A4D;
     --color-gold-dim:        rgba(180, 134, 85, 0.35);
     --color-burgundy-glow:   rgba(157, 25, 42, 0.10);
-}
-
-/* Auto-detect system preference */
-@media (prefers-color-scheme: light) {
-    :root:not([data-theme="dark"]) {
-        --color-bg:              #F8F4EA;
-        --color-bg-rgb:          248, 244, 234;
-        --color-surface:         #E7D9C5;
-        --color-surface-2:       #DDD0B8;
-        --color-text:            #701321;
-        --color-text-secondary:  #9D192A;
-        --color-cream:           #701321;
-        --color-beige:           #9D192A;
-        --color-muted:           #A47A4D;
-        --color-gold-dim:        rgba(180, 134, 85, 0.35);
-        --color-burgundy-glow:   rgba(157, 25, 42, 0.10);
-    }
 }
 
 /* ---------- Reset ---------- */
@@ -161,11 +144,6 @@ input, textarea, select {
 
 [data-theme="light"] .logo--dark  { display: none; }
 [data-theme="light"] .logo--light { display: block; }
-
-@media (prefers-color-scheme: light) {
-    :root:not([data-theme="dark"]) .logo--dark  { display: none; }
-    :root:not([data-theme="dark"]) .logo--light { display: block; }
-}
 
 /* ---------- Language switcher ---------- */
 .lang-switcher {
@@ -273,20 +251,9 @@ input, textarea, select {
 [data-theme="light"] .theme-toggle__sun  { display: block; }
 [data-theme="light"] .theme-toggle__moon { display: none; }
 
-@media (prefers-color-scheme: light) {
-    :root:not([data-theme="dark"]) .theme-toggle__sun  { display: block; }
-    :root:not([data-theme="dark"]) .theme-toggle__moon { display: none; }
-}
-
 /* ---------- Light mode map filter ---------- */
 [data-theme="light"] .location__map .leaflet-tile-pane {
     filter: brightness(1.05) contrast(1.05) saturate(0.6) sepia(0.1);
-}
-
-@media (prefers-color-scheme: light) {
-    :root:not([data-theme="dark"]) .location__map .leaflet-tile-pane {
-        filter: brightness(1.05) contrast(1.05) saturate(0.6) sepia(0.1);
-    }
 }
 
 /* ---------- Light mode form inputs ---------- */
@@ -295,29 +262,12 @@ input, textarea, select {
 }
 
 [data-theme="light"] .form__button {
-    color: #F8F4EA;
-}
-
-@media (prefers-color-scheme: light) {
-    :root:not([data-theme="dark"]) .form__input {
-        border-bottom-color: rgba(157, 25, 42, 0.2);
-    }
-    :root:not([data-theme="dark"]) .form__button {
-        color: #F8F4EA;
-    }
+    color: var(--color-bg);
 }
 
 /* ---------- Light mode gallery image treatment ---------- */
-[data-theme="light"] .gallery__img,
-[data-theme="light"] .studio__image {
-    filter: saturate(1) contrast(1);
-}
-
-@media (prefers-color-scheme: light) {
-    :root:not([data-theme="dark"]) .gallery__img,
-    :root:not([data-theme="dark"]) .studio__image {
-        filter: saturate(1) contrast(1);
-    }
+[data-theme="light"] .gallery__img {
+    filter: none;
 }
 
 /* ============================
@@ -387,15 +337,6 @@ input, textarea, select {
 [data-theme="light"] .wave-divider--to-bg .wave-layer--1 { fill: #ECE0CF; }
 [data-theme="light"] .wave-divider--to-bg .wave-layer--2 { fill: #F0E7D8; }
 [data-theme="light"] .wave-divider--to-bg .wave-layer--3 { fill: #F4EEE1; }
-
-@media (prefers-color-scheme: light) {
-    :root:not([data-theme="dark"]) .wave-divider--to-surface .wave-layer--1 { fill: #F4EEE1; }
-    :root:not([data-theme="dark"]) .wave-divider--to-surface .wave-layer--2 { fill: #F0E7D8; }
-    :root:not([data-theme="dark"]) .wave-divider--to-surface .wave-layer--3 { fill: #ECE0CF; }
-    :root:not([data-theme="dark"]) .wave-divider--to-bg .wave-layer--1 { fill: #ECE0CF; }
-    :root:not([data-theme="dark"]) .wave-divider--to-bg .wave-layer--2 { fill: #F0E7D8; }
-    :root:not([data-theme="dark"]) .wave-divider--to-bg .wave-layer--3 { fill: #F4EEE1; }
-}
 
 /* Scroll-triggered reveal — waves unfold from below upward */
 .wave-divider .wave-layer {
@@ -772,10 +713,6 @@ body.loaded .hero__rule {
     transition: opacity 1.2s var(--ease-out-expo) 0.2s, transform 1.2s var(--ease-out-expo) 0.2s;
 }
 
-.anim-draw {
-    /* handled via body.loaded .hero__rule */
-}
-
 .anim-fade-up {
     opacity: 0;
     transform: translateY(16px);
@@ -1141,8 +1078,6 @@ body.loaded .anim-fade-in-late {
     width: auto;
     opacity: 0.7;
     filter: brightness(2);
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
 }
 
 .marquee__logo--mercedes { height: 75px; }
@@ -1162,7 +1097,7 @@ body.loaded .anim-fade-in-late {
     font-family: var(--font-display);
     font-size: calc(1rem + 4px);
     font-weight: 700;
-    color: #ffffff;
+    color: var(--color-cream);
     opacity: 0.7;
     letter-spacing: 0.02em;
     line-height: 1.2;
@@ -1172,7 +1107,7 @@ body.loaded .anim-fade-in-late {
     font-family: var(--font-body);
     font-size: 0.55rem;
     font-weight: 400;
-    color: #ffffff;
+    color: var(--color-cream);
     opacity: 0.45;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -1185,18 +1120,7 @@ body.loaded .anim-fade-in-late {
 
 [data-theme="light"] .marquee__name,
 [data-theme="light"] .marquee__role {
-    color: #701321;
-}
-
-@media (prefers-color-scheme: light) {
-    :root:not([data-theme="dark"]) .marquee__logo {
-        filter: none;
-        opacity: 0.8;
-    }
-    :root:not([data-theme="dark"]) .marquee__name,
-    :root:not([data-theme="dark"]) .marquee__role {
-        color: #701321;
-    }
+    color: var(--color-text);
 }
 
 @keyframes marquee-scroll {

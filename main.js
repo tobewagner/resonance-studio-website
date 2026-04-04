@@ -110,21 +110,39 @@
             '10245 Berlin'
         );
 
-    /* ---------- Hero parallax ---------- */
+    /* ---------- Hero parallax + Nav (combined scroll handler) ---------- */
+    var nav         = document.querySelector('.nav');
     var heroContent = document.querySelector('.hero__content');
     var hero        = document.querySelector('.hero');
+    var heroH       = hero ? hero.offsetHeight : 0;
+    var scrollTick  = false;
+
+    window.addEventListener('resize', function () {
+        heroH = hero ? hero.offsetHeight : 0;
+    }, { passive: true });
 
     function onScroll() {
-        var scrollY = window.scrollY;
-        var heroH   = hero.offsetHeight;
-
-        if (scrollY < heroH && heroContent) {
-            heroContent.style.transform = 'translateY(' + scrollY * 0.3 + 'px)';
-            heroContent.style.opacity   = 1 - scrollY / (heroH * 0.8);
-        }
+        if (scrollTick) return;
+        scrollTick = true;
+        requestAnimationFrame(function () {
+            var scrollY = window.scrollY;
+            if (scrollY < heroH && heroContent) {
+                heroContent.style.transform = 'translateY(' + scrollY * 0.3 + 'px)';
+                heroContent.style.opacity   = 1 - scrollY / (heroH * 0.8);
+            }
+            if (nav) {
+                if (scrollY > 50) {
+                    nav.classList.add('nav--scrolled');
+                } else {
+                    nav.classList.remove('nav--scrolled');
+                }
+            }
+            scrollTick = false;
+        });
     }
 
     window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
 
     /* ---------- Scroll reveal ---------- */
     var reveals = document.querySelectorAll('.reveal, .wave-divider');
@@ -143,21 +161,6 @@
     } else {
         reveals.forEach(function (el) { el.classList.add('revealed'); });
     }
-
-    /* ---------- Navbar ---------- */
-    var nav = document.querySelector('.nav');
-
-    function updateNav() {
-        if (!nav) return;
-        if (window.scrollY > 50) {
-            nav.classList.add('nav--scrolled');
-        } else {
-            nav.classList.remove('nav--scrolled');
-        }
-    }
-
-    window.addEventListener('scroll', updateNav, { passive: true });
-    updateNav();
 
     /* ---------- Contact form (Formspree) ---------- */
     var form   = document.getElementById('contact-form');
