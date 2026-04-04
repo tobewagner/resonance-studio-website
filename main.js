@@ -63,6 +63,22 @@
         emailContainer.appendChild(a);
     }
 
+    /* ---------- Anchor scroll within #page-scroll ---------- */
+    var pageScroll = document.getElementById('page-scroll');
+    if (pageScroll) {
+        document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+            link.addEventListener('click', function (e) {
+                var id = this.getAttribute('href');
+                if (id === '#') return;
+                var target = document.querySelector(id);
+                if (target && pageScroll.contains(target)) {
+                    e.preventDefault();
+                    pageScroll.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
+                }
+            });
+        });
+    }
+
     /* ---------- Mobile menu ---------- */
     var burger     = document.getElementById('nav-burger');
     var mobileMenu = document.getElementById('mobile-menu');

@@ -55,7 +55,7 @@
     --font-body:    'Sulphur Point', 'Helvetica Neue', Arial, sans-serif;
 
     --nav-h: 68px;
-    --container-max: 1100px;
+    --container-max: 1320px;
     --section-pad:   clamp(5rem, 12vh, 9rem);
     --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -476,7 +476,9 @@ body::before {
 
 .nav__logo {
     height: 26px;
-    width: auto;
+    width: 140px;
+    object-fit: contain;
+    object-position: left;
     opacity: 0.8;
     transition: opacity 0.3s;
 }
@@ -491,7 +493,7 @@ body::before {
 }
 
 .nav__link {
-    font-size: 0.95rem;
+    font-size: clamp(0.7rem, 1vw, 0.95rem);
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
