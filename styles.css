@@ -292,7 +292,7 @@ input, textarea, select {
    matching the Resonance business card
    ============================ */
 .wave-divider {
-    --divider-h: clamp(40px, 10vw, 150px);
+    --divider-h: clamp(42px, 10vw, 150px);
     position: relative;
     z-index: 1;
     width: 100%;
@@ -667,6 +667,12 @@ body::before {
         linear-gradient(to bottom, rgba(var(--color-bg-rgb), 0.0) 0%, rgba(var(--color-bg-rgb), 0.35) 50%, rgba(var(--color-bg-rgb), 0.77) 100%);
 }
 
+[data-theme="light"] .hero__overlay {
+    background:
+        radial-gradient(ellipse at 50% 40%, rgba(var(--color-bg-rgb), 0.0425) 0%, rgba(var(--color-bg-rgb), 0.3825) 60%),
+        linear-gradient(to bottom, rgba(var(--color-bg-rgb), 0.0) 0%, rgba(var(--color-bg-rgb), 0.2975) 50%, rgba(var(--color-bg-rgb), 0.6545) 100%);
+}
+
 .hero__content {
     position: relative;
     z-index: 1;
@@ -678,7 +684,9 @@ body::before {
 .hero__logo {
     width: clamp(200px, 35vw, 380px);
     margin: 0 auto 2rem;
-    filter: drop-shadow(0 2px 24px rgba(0, 0, 0, 0.6));
+    filter: drop-shadow(0 0 9px rgba(var(--color-bg-rgb), 0.55))
+            drop-shadow(0 0 22px rgba(var(--color-bg-rgb), 0.385))
+            drop-shadow(0 0 44px rgba(var(--color-bg-rgb), 0.22));
 }
 
 .hero__title {
@@ -695,14 +703,20 @@ body::before {
 
 .hero__rule {
     width: 0;
-    height: 1px;
-    background: var(--color-gold-dim);
+    height: 4px;
+    background: linear-gradient(to right, transparent, var(--color-beige), transparent);
+    border-radius: 2px;
     margin: 0 auto 1.8rem;
+    box-shadow:
+        0 0 8px rgba(var(--color-bg-rgb), 0.5),
+        0 0 20px rgba(var(--color-bg-rgb), 0.35),
+        0 0 40px rgba(var(--color-bg-rgb), 0.2);
+    transition: box-shadow 0.5s;
     transition: width 1.2s var(--ease-out-expo) 0.6s;
 }
 
 body.loaded .hero__rule {
-    width: clamp(80px, 12vw, 160px);
+    width: clamp(200px, 35vw, 380px);
 }
 
 .hero__sub {
@@ -713,9 +727,9 @@ body.loaded .hero__rule {
     color: var(--color-beige);
     line-height: 1.7;
     text-shadow:
-        0 0 12px rgba(var(--color-bg-rgb), 0.8),
-        0 0 30px rgba(var(--color-bg-rgb), 0.6),
-        0 0 60px rgba(var(--color-bg-rgb), 0.4);
+        0 0 14px rgba(var(--color-bg-rgb), 0.92),
+        0 0 35px rgba(var(--color-bg-rgb), 0.69),
+        0 0 69px rgba(var(--color-bg-rgb), 0.46);
 }
 
 /* Hero entrance animations */
@@ -803,8 +817,8 @@ body.loaded .anim-fade-in-late {
 }
 
 .creator__img {
-    width: 90px;
-    height: 90px;
+    width: 104px;
+    height: 104px;
     border-radius: 50%;
     object-fit: cover;
     flex-shrink: 0;
@@ -1176,7 +1190,7 @@ body.loaded .anim-fade-in-late {
    LOCATION
    ============================ */
 .location {
-    background: var(--color-surface);
+    background: var(--color-bg);
 }
 
 .location__grid {
@@ -1234,7 +1248,7 @@ body.loaded .anim-fade-in-late {
    CONTACT
    ============================ */
 .contact {
-    background: var(--color-bg);
+    background: var(--color-surface);
 }
 
 .contact__grid {

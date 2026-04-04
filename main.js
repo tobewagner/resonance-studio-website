@@ -25,10 +25,23 @@
     // Apply immediately to prevent flash
     applyTheme(getPreferredTheme());
 
+    var heroLogo = document.querySelector('.hero__logo:not([style*="display: none"])') || document.querySelector('.hero__logo');
+    var heroRule = document.querySelector('.hero__rule');
+    var heroSub  = document.querySelector('.hero__sub');
+    var glowEls  = [heroLogo, heroRule, heroSub].filter(Boolean);
+
     if (themeBtn) {
         themeBtn.addEventListener('click', function () {
             var current = root.getAttribute('data-theme') || 'dark';
+            // Hide glow before switch
+            glowEls.forEach(function (el) { el.style.filter = 'none'; el.style.boxShadow = 'none'; el.style.textShadow = 'none'; });
             applyTheme(current === 'dark' ? 'light' : 'dark');
+            // Restore glow after repaint
+            requestAnimationFrame(function () {
+                requestAnimationFrame(function () {
+                    glowEls.forEach(function (el) { el.style.filter = ''; el.style.boxShadow = ''; el.style.textShadow = ''; });
+                });
+            });
         });
     }
 
