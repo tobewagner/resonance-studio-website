@@ -32,7 +32,7 @@ Static single-page website for **Resonance Studio Berlin**, a recording/mixing/m
 - **Color palette** (Resonance Color Space):
   - Warm: `#A47A4D` `#B48655` `#D6BDA0` `#F8F4EA` `#E7D9C5`
   - Reds: `#701321` `#871626` `#9D192A`
-- **Dark mode**: bg `#701321`, surface `#871626` (alternating), beige logo. Wave divider colors: `#761423` `#7C1524` `#821625`
+- **Dark mode**: bg `#2D0B12`, surface `#421018` (alternating), beige logo. Wave divider colors: `#310C14` `#360D16` `#3B0E18`
 - **Light mode**: bg `#F8F4EA`, surface `#E7D9C5` (alternating), red logo. Wave divider colors: `#ECE0CF` `#F0E7D8` `#F4EEE1`
 - **Wave dividers**: 3-layer organic SVG curves between sections. Overlap hero image at bottom. Scroll-triggered fade-in + breathe animation.
 - **Gallery**: 60vw on desktop, 92vw on mobile. Masonry columns. Ripple glow via `::before` pseudo-element (z-index:-2) so all images (z-index:5) sit above all glows. `reveal` class on `.gallery__grid`, NOT on individual items. Cream glow on dark, burgundy on light, single play (no loop).

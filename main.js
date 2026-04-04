@@ -18,6 +18,8 @@
     function applyTheme(theme) {
         root.setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
+        var tc = document.querySelector('meta[name="theme-color"]');
+        if (tc) tc.setAttribute('content', theme === 'light' ? '#F8F4EA' : '#2D0B12');
     }
 
     // Apply immediately to prevent flash
@@ -114,6 +116,7 @@
     var nav         = document.querySelector('.nav');
     var heroContent = document.querySelector('.hero__content');
     var hero        = document.querySelector('.hero');
+    var scroller    = document.getElementById('page-scroll');
     var heroH       = hero ? hero.offsetHeight : 0;
     var scrollTick  = false;
 
@@ -125,7 +128,7 @@
         if (scrollTick) return;
         scrollTick = true;
         requestAnimationFrame(function () {
-            var scrollY = window.scrollY;
+            var scrollY = scroller ? scroller.scrollTop : window.scrollY;
             if (scrollY < heroH && heroContent) {
                 heroContent.style.transform = 'translateY(' + scrollY * 0.3 + 'px)';
                 heroContent.style.opacity   = 1 - scrollY / (heroH * 0.8);
@@ -141,7 +144,7 @@
         });
     }
 
-    window.addEventListener('scroll', onScroll, { passive: true });
+    (scroller || window).addEventListener('scroll', onScroll, { passive: true });
     onScroll();
 
     /* ---------- Scroll reveal ---------- */
@@ -155,7 +158,7 @@
                     revealObserver.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+        }, { root: scroller || null, threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
 
         reveals.forEach(function (el) { revealObserver.observe(el); });
     } else {
@@ -197,4 +200,165 @@
             });
         });
     }
+    /* ---------- Ticker (rAF-based, iOS-safe) ---------- */
+    var ticker = document.getElementById('ticker');
+    var tTrack = document.getElementById('ticker-track');
+
+    if (ticker && tTrack) {
+        var tBaseSpeed = 0.96;  // 20% slower than 1.2
+        var tVelocity  = -tBaseSpeed;
+        var tIsMobile  = 'ontouchstart' in window;
+        var tFriction  = tIsMobile ? 0.99 : 0.995;
+        var tRecovery  = 0.0014;
+        var tOffset    = 0;
+        var tSetW      = 0;
+        var tOrigHTML  = tTrack.innerHTML;
+        var tReady     = false;
+        var tDrag      = false;
+        var tStartX    = 0;
+        var tBaseOff   = 0;
+        var tLastX     = 0;
+        var tLastTime  = 0;
+
+        function tBuild() {
+            // Start with one set, measure it
+            tTrack.innerHTML = tOrigHTML;
+
+            // Wait for all images in the track to load, then measure + clone
+            var imgs = tTrack.querySelectorAll('img');
+            var loaded = 0;
+            var total = imgs.length;
+
+            function onAllLoaded() {
+                // Measure one set: total width of all children + gaps
+                var gap = parseFloat(getComputedStyle(tTrack).gap) || 0;
+                var items = tTrack.children;
+                tSetW = 0;
+                for (var i = 0; i < items.length; i++) {
+                    tSetW += items[i].getBoundingClientRect().width;
+                    if (i < items.length - 1) tSetW += gap;
+                }
+                tSetW += gap; // trailing gap before next set
+
+                // Clone enough sets to cover viewport + 2 extra
+                var copies = Math.ceil(window.innerWidth / tSetW) + 2;
+                for (var c = 0; c < copies; c++) {
+                    tTrack.innerHTML += tOrigHTML;
+                }
+
+                // Mark aria-hidden on clones
+                var allItems = tTrack.children;
+                var origCount = items.length;
+                for (var j = origCount; j < allItems.length; j++) {
+                    allItems[j].setAttribute('aria-hidden', 'true');
+                }
+
+                tReady = true;
+            }
+
+            if (total === 0) { onAllLoaded(); return; }
+            for (var i = 0; i < total; i++) {
+                if (imgs[i].complete) {
+                    loaded++;
+                    if (loaded === total) onAllLoaded();
+                } else {
+                    imgs[i].addEventListener('load', function () {
+                        loaded++;
+                        if (loaded === total) onAllLoaded();
+                    });
+                    imgs[i].addEventListener('error', function () {
+                        loaded++;
+                        if (loaded === total) onAllLoaded();
+                    });
+                }
+            }
+        }
+
+        function tWrap() {
+            // Smooth modulo — never jumps because content repeats
+            tOffset = ((tOffset % tSetW) + tSetW) % tSetW;
+            if (tOffset > 0) tOffset -= tSetW;
+        }
+
+        // Recovery: reach -tBaseSpeed in ~2s at 60fps = 120 frames
+        var tAccel = tBaseSpeed / 120;
+
+        function tLoop() {
+            if (tReady) {
+                if (!tDrag) {
+                    tOffset += tVelocity;
+
+                    var target = -tBaseSpeed;
+                    var diff = target - tVelocity;
+
+                    if (Math.abs(diff) < 0.01) {
+                        // At target speed
+                        tVelocity = target;
+                    } else if (Math.abs(tVelocity) > tBaseSpeed * 1.2) {
+                        // Phase 1: fast momentum — apply friction to slow down
+                        tVelocity *= tFriction;
+                    } else {
+                        // Phase 2: slow or stopped — linear accel toward target
+                        if (diff < 0) {
+                            tVelocity -= tAccel;
+                            if (tVelocity < target) tVelocity = target;
+                        } else {
+                            tVelocity += tAccel;
+                            if (tVelocity > target) tVelocity = target;
+                        }
+                    }
+                }
+                tWrap();
+                tTrack.style.transform = 'translate3d(' + tOffset + 'px,0,0)';
+            }
+            requestAnimationFrame(tLoop);
+        }
+
+        function tDown(e) {
+            if (!tReady) return;
+            tDrag = true;
+            ticker.classList.add('is-dragging');
+            tBaseOff = tOffset;
+            var pt = e.touches ? e.touches[0] : e;
+            tStartX = pt.clientX;
+            tLastX = pt.clientX;
+            tLastTime = Date.now();
+            if (e.type === 'mousedown') e.preventDefault();
+        }
+
+        function tMove(e) {
+            if (!tDrag) return;
+            var pt = e.touches ? e.touches[0] : e;
+            var now = Date.now();
+            var dt = now - tLastTime;
+            if (dt > 0) {
+                tVelocity = (pt.clientX - tLastX) / Math.max(dt, 8) * 16;
+            }
+            tLastX = pt.clientX;
+            tLastTime = now;
+            tOffset = tBaseOff + (pt.clientX - tStartX);
+        }
+
+        function tUp() {
+            if (!tDrag) return;
+            tDrag = false;
+            ticker.classList.remove('is-dragging');
+            // tVelocity already set from last tMove — momentum continues
+        }
+
+        ticker.addEventListener('mousedown', tDown);
+        ticker.addEventListener('touchstart', tDown, { passive: true });
+        window.addEventListener('mousemove', tMove);
+        window.addEventListener('touchmove', tMove, { passive: true });
+        window.addEventListener('mouseup', tUp);
+        window.addEventListener('touchend', tUp);
+
+        tBuild();
+        requestAnimationFrame(tLoop);
+        window.addEventListener('resize', function () { tReady = false; tBuild(); });
+    }
+
+    /* ---------- Content protection ---------- */
+    document.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+    document.addEventListener('copy', function (e) { e.preventDefault(); });
 })();
