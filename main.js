@@ -104,6 +104,12 @@
         for (var i = 0; i < menuLinks.length; i++) {
             menuLinks[i].addEventListener('click', closeMenu);
         }
+
+        window.addEventListener('resize', function () {
+            if (window.innerWidth >= 700 && mobileMenu.classList.contains('open')) {
+                closeMenu();
+            }
+        });
     }
 
     /* ---------- Leaflet map ---------- */
