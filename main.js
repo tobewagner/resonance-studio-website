@@ -194,7 +194,7 @@
             galleryCols = cols;
 
             // Remove existing column divs
-            galleryGrid.innerHTML = '';
+            galleryGrid.replaceChildren();
 
             // Create column containers
             var colDivs = [];
@@ -277,7 +277,6 @@
         var tVelocity  = -tBaseSpeed;
         var tIsMobile  = 'ontouchstart' in window;
         var tFriction  = tIsMobile ? 0.99 : 0.995;
-        var tRecovery  = 0.0014;
         var tOffset    = 0;
         var tSetW      = 0;
         var tOrigHTML  = tTrack.innerHTML;
@@ -310,9 +309,9 @@
 
                 // Clone enough sets to cover viewport + 2 extra
                 var copies = Math.ceil(window.innerWidth / tSetW) + 2;
-                for (var c = 0; c < copies; c++) {
-                    tTrack.innerHTML += tOrigHTML;
-                }
+                var html = tTrack.innerHTML;
+                for (var c = 0; c < copies; c++) html += tOrigHTML;
+                tTrack.innerHTML = html;
 
                 // Mark aria-hidden on clones
                 var allItems = tTrack.children;
@@ -379,7 +378,16 @@
                 tWrap();
                 tTrack.style.transform = 'translate3d(' + tOffset + 'px,0,0)';
             }
-            requestAnimationFrame(tLoop);
+            if (tVisible) requestAnimationFrame(tLoop);
+        }
+
+        // Pause ticker when off-screen (battery saving)
+        var tVisible = true;
+        if ('IntersectionObserver' in window) {
+            new IntersectionObserver(function (entries) {
+                tVisible = entries[0].isIntersecting;
+                if (tVisible && tReady) requestAnimationFrame(tLoop);
+            }).observe(ticker);
         }
 
         function tDown(e) {
@@ -421,9 +429,13 @@
         window.addEventListener('mouseup', tUp);
         window.addEventListener('touchend', tUp);
 
+        var tResizeTimer;
         tBuild();
         requestAnimationFrame(tLoop);
-        window.addEventListener('resize', function () { tReady = false; tBuild(); });
+        window.addEventListener('resize', function () {
+            clearTimeout(tResizeTimer);
+            tResizeTimer = setTimeout(function () { tReady = false; tBuild(); }, 250);
+        });
     }
 
     /* ---------- Content protection ---------- */
