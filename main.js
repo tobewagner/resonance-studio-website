@@ -130,13 +130,68 @@
         for (var i = 0; i < menuLinks.length; i++) {
             menuLinks[i].addEventListener('click', closeMenu);
         }
-
-        window.addEventListener('resize', function () {
-            if (window.innerWidth >= 700 && mobileMenu.classList.contains('open')) {
-                closeMenu();
-            }
-        });
     }
+
+    /* ---------- Nav responsive fit ---------- */
+    var nav         = document.getElementById('nav');
+    var navInner    = document.querySelector('.nav__inner');
+    var navLinks    = document.getElementById('nav-links');
+    var navActions  = document.querySelector('.nav__actions');
+    var logoLink    = document.querySelector('.nav__logo-link');
+    var linkEls     = navLinks ? [].slice.call(navLinks.children) : [];
+
+    function navFit() {
+        if (!navInner || !navLinks || !navActions || !logoLink) return;
+
+        // Reset: show all links, full logo, hide burger
+        for (var i = 0; i < linkEls.length; i++) linkEls[i].style.display = '';
+        nav.classList.remove('nav--compact');
+        navLinks.style.display = 'flex';
+        burger.style.display = 'none';
+
+        var containerW = navInner.offsetWidth;
+        var actionsW   = navActions.offsetWidth;
+        var GAP        = 24;
+
+        function usedWidth() {
+            return logoLink.offsetWidth + GAP + navLinks.scrollWidth + GAP + actionsW;
+        }
+
+        // Step 1: swap to icon logo if needed
+        if (usedWidth() > containerW) {
+            nav.classList.add('nav--compact');
+        }
+
+        // Step 2: hide links from right until it fits
+        var hiddenCount = 0;
+        for (var j = linkEls.length - 1; j >= 0; j--) {
+            if (usedWidth() <= containerW) break;
+            linkEls[j].style.display = 'none';
+            hiddenCount++;
+        }
+
+        // Step 3: if too few links remain, hide all → burger only + full logo
+        var visibleCount = linkEls.length - hiddenCount;
+        if (hiddenCount > 0 && visibleCount <= 2) {
+            for (var k = 0; k < linkEls.length; k++) linkEls[k].style.display = 'none';
+            navLinks.style.display = 'none';
+            nav.classList.remove('nav--compact'); // full logo for mobile/burger mode
+            burger.style.display = 'flex';
+        } else if (hiddenCount > 0) {
+            burger.style.display = 'flex';
+        }
+
+        // Close mobile menu if all links visible again
+        if (hiddenCount === 0 && mobileMenu && mobileMenu.classList.contains('open')) {
+            closeMenu();
+        }
+    }
+
+    navFit();
+    window.addEventListener('resize', navFit);
+    window.addEventListener('langchange', function () {
+        requestAnimationFrame(navFit);
+    });
 
     /* ---------- Leaflet map ---------- */
     var LAT = 52.51334;

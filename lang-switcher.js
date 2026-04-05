@@ -15,14 +15,13 @@
         { code: 'ar', country: 'sa', name: 'العربية' },
         { code: 'pt', country: 'br', name: 'Português' },
         { code: 'hi', country: 'in', name: 'हिन्दी' },
-        { code: 'ru', country: 'ru', name: 'Русский' },
+        { code: 'uk', country: 'ua', name: 'Українська' },
         { code: 'ja', country: 'jp', name: '日本語' },
         { code: 'ko', country: 'kr', name: '한국어' },
         { code: 'it', country: 'it', name: 'Italiano' },
         { code: 'tr', country: 'tr', name: 'Türkçe' },
         { code: 'nl', country: 'nl', name: 'Nederlands' },
         { code: 'pl', country: 'pl', name: 'Polski' },
-        { code: 'uk', country: 'ua', name: 'Українська' },
         { code: 'th', country: 'th', name: 'ไทย' },
         { code: 'vi', country: 'vn', name: 'Tiếng Việt' },
         { code: 'id', country: 'id', name: 'Bahasa' },
@@ -104,6 +103,7 @@
         });
 
         document.documentElement.lang = lang;
+        document.documentElement.dir = (lang === 'ar' || lang === 'fa') ? 'rtl' : 'ltr';
         if (t.meta_title) document.title = t.meta_title;
         var desc = document.querySelector('meta[name="description"]');
         if (desc && t.meta_description) desc.content = t.meta_description;
@@ -133,6 +133,7 @@
         applyTranslations(lang);
         updateButton();
         dropdown.classList.remove('show');
+        window.dispatchEvent(new Event('langchange'));
     }
 
     /* ---------- Build dropdown (once) ---------- */
