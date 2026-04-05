@@ -149,6 +149,14 @@
         navLinks.style.display = 'flex';
         burger.style.display = 'none';
 
+        // Mobile: always burger only
+        if (window.innerWidth <= 700) {
+            for (var m = 0; m < linkEls.length; m++) linkEls[m].style.display = 'none';
+            navLinks.style.display = 'none';
+            burger.style.display = 'flex';
+            return;
+        }
+
         var containerW = navInner.offsetWidth;
         var actionsW   = navActions.offsetWidth;
         var GAP        = 24;
@@ -175,7 +183,7 @@
         if (hiddenCount > 0 && visibleCount <= 2) {
             for (var k = 0; k < linkEls.length; k++) linkEls[k].style.display = 'none';
             navLinks.style.display = 'none';
-            nav.classList.remove('nav--compact'); // full logo for mobile/burger mode
+            nav.classList.remove('nav--compact'); // full logo for burger mode
             burger.style.display = 'flex';
         } else if (hiddenCount > 0) {
             burger.style.display = 'flex';
