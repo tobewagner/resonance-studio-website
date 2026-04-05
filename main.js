@@ -99,7 +99,7 @@
                 var target = document.querySelector(id);
                 if (target && pageScroll.contains(target)) {
                     e.preventDefault();
-                    pageScroll.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
@@ -362,7 +362,7 @@
     var tTrack = document.getElementById('ticker-track');
 
     if (ticker && tTrack) {
-        var tBaseSpeed = 0.96;  // 20% slower than 1.2
+        var tBaseSpeed = 57.6;  // pixels per second (≈0.96px @ 60fps)
         var tVelocity  = -tBaseSpeed;
         var tIsMobile  = 'ontouchstart' in window;
         var tFriction  = tIsMobile ? 0.99 : 0.995;
@@ -375,6 +375,7 @@
         var tBaseOff   = 0;
         var tLastX     = 0;
         var tLastTime  = 0;
+        var tPrevTime  = 0;
 
         function tBuild() {
             // Start with one set, measure it
@@ -436,30 +437,34 @@
             if (tOffset > 0) tOffset -= tSetW;
         }
 
-        // Recovery: reach -tBaseSpeed in ~2s at 60fps = 120 frames
-        var tAccel = tBaseSpeed / 120;
+        // Recovery: reach -tBaseSpeed in ~2s
+        var tAccelRate = tBaseSpeed / 2; // px/s per second
 
-        function tLoop() {
+        function tLoop(now) {
+            if (!tPrevTime) tPrevTime = now;
+            var dt = Math.min((now - tPrevTime) / 1000, 0.05); // seconds, capped at 50ms
+            tPrevTime = now;
+
             if (tReady) {
                 if (!tDrag) {
-                    tOffset += tVelocity;
+                    tOffset += tVelocity * dt;
 
                     var target = -tBaseSpeed;
                     var diff = target - tVelocity;
 
-                    if (Math.abs(diff) < 0.01) {
-                        // At target speed
+                    if (Math.abs(diff) < 0.5) {
                         tVelocity = target;
                     } else if (Math.abs(tVelocity) > tBaseSpeed * 1.2) {
-                        // Phase 1: fast momentum — apply friction to slow down
-                        tVelocity *= tFriction;
+                        // Phase 1: fast momentum — apply friction
+                        var frictionPerSec = Math.pow(tFriction, 60);
+                        tVelocity *= Math.pow(frictionPerSec, dt);
                     } else {
-                        // Phase 2: slow or stopped — linear accel toward target
+                        // Phase 2: linear accel toward target
                         if (diff < 0) {
-                            tVelocity -= tAccel;
+                            tVelocity -= tAccelRate * dt;
                             if (tVelocity < target) tVelocity = target;
                         } else {
-                            tVelocity += tAccel;
+                            tVelocity += tAccelRate * dt;
                             if (tVelocity > target) tVelocity = target;
                         }
                     }

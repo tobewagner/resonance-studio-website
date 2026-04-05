@@ -115,6 +115,7 @@ body {
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
+    scroll-padding-top: 10px;
     scrollbar-color: var(--color-gold-dim) rgba(var(--color-bg-rgb), 0.15);
 }
 
@@ -164,7 +165,7 @@ input, textarea, select {
 /* ---------- Script-specific font stacks & metrics ---------- */
 
 /* Cyrillic (Ukrainian) */
-[lang="uk"] { --font-display: 'Sulphur Point', system-ui, 'Segoe UI', sans-serif; --font-body: 'Sulphur Point', system-ui, 'Segoe UI', sans-serif; }
+[lang="uk"], [lang="ru"] { --font-display: 'Sulphur Point', system-ui, 'Segoe UI', sans-serif; --font-body: 'Sulphur Point', system-ui, 'Segoe UI', sans-serif; }
 
 /* Greek */
 [lang="el"] { --font-display: 'Sulphur Point', system-ui, 'Segoe UI', sans-serif; --font-body: 'Sulphur Point', system-ui, 'Segoe UI', sans-serif; }
@@ -424,8 +425,8 @@ input, textarea, select {
     z-index: 2;
     background: transparent;
     margin: 0;
-    -webkit-mask-image: linear-gradient(to top, black 0%, rgba(0,0,0,0.3) 100%);
-    mask-image: linear-gradient(to top, black 0%, rgba(0,0,0,0.3) 100%);
+    -webkit-mask-image: linear-gradient(to top, black 0%, black 30%, rgba(0,0,0,0.3) 100%);
+    mask-image: linear-gradient(to top, black 0%, black 30%, rgba(0,0,0,0.3) 100%);
 }
 
 .wave-divider svg {
@@ -516,9 +517,20 @@ body::before {
 }
 
 .section {
-    padding: var(--section-pad) 0;
+    scroll-margin-top: 10px;
+    padding: calc(var(--section-pad) * 0.7) 0 calc(var(--section-pad) * 0.8);
     position: relative;
     z-index: 0;
+}
+
+.section::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: inherit;
 }
 
 .section__label {
@@ -658,7 +670,8 @@ body::before {
 .nav__actions {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 16px;
+    flex-shrink: 0;
 }
 
 /* Hamburger — 3 lines */
@@ -1027,37 +1040,8 @@ body.loaded .anim-fade-up {
 }
 
 .service-card {
-    padding: 2rem 0;
+    padding: 0;
     position: relative;
-}
-
-@media (min-width: 700px) {
-    .service-card--offset {
-        margin-top: 3rem;
-    }
-}
-
-.service-card__number {
-    font-family: var(--font-display);
-    font-size: clamp(2.5rem, 5vw, 3.5rem);
-    font-weight: 700;
-    color: var(--color-gold);
-    opacity: 0.5;
-    line-height: 1;
-    display: block;
-    margin-bottom: 1rem;
-}
-
-.service-card__rule {
-    width: 40px;
-    height: 1px;
-    background: var(--color-gold-dim);
-    margin-bottom: 1.5rem;
-    transition: width 0.6s var(--ease-out-expo);
-}
-
-.service-card:hover .service-card__rule {
-    width: 70px;
 }
 
 .service-card__title {
