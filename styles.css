@@ -221,7 +221,9 @@ input, textarea, select {
 [lang="th"] .nav__link { font-size: 0.8rem; }
 [lang="hi"] .nav__link { font-size: 0.85rem; }
 [lang="uk"] .nav__link,
-[lang="uk"] .lang-btn { font-weight: 400; }
+[lang="ru"] .nav__link { font-weight: 400; font-size: 0.9rem; }
+[lang="uk"] .lang-btn,
+[lang="ru"] .lang-btn { font-weight: 400; position: relative; top: -1px; }
 [lang="el"] .nav__link,
 [lang="el"] .lang-btn { font-weight: 400; }
 
@@ -232,6 +234,7 @@ input, textarea, select {
 [lang="ar"] .mobile-menu__link,
 [lang="fa"] .mobile-menu__link { font-weight: 500; }
 [lang="uk"] .mobile-menu__link,
+[lang="ru"] .mobile-menu__link,
 [lang="el"] .mobile-menu__link { font-weight: 400; }
 
 /* ---------- RTL layout ---------- */
@@ -349,7 +352,8 @@ input, textarea, select {
 
 /* Greek & Cyrillic: slightly smaller to match Latin x-height */
 .lang-option[data-lang="el"] span { font-size: 0.78rem; }
-.lang-option[data-lang="uk"] span { font-size: 0.80rem; }
+.lang-option[data-lang="uk"] span,
+.lang-option[data-lang="ru"] span { font-size: 0.80rem; }
 
 /* ---------- Theme toggle ---------- */
 .theme-toggle {

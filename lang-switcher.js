@@ -31,7 +31,8 @@
         { code: 'cs', country: 'cz', name: 'Čeština' },
         { code: 'el', country: 'gr', name: 'Ελληνικά' },
         { code: 'hu', country: 'hu', name: 'Magyar' },
-        { code: 'fa', country: 'ir', name: 'فارسی' }
+        { code: 'fa', country: 'ir', name: 'فارسی' },
+        { code: 'ru', country: 'ru', name: 'Русский' }
     ];
 
     var FLAG_CDN = 'https://flagcdn.com/48x36/';
