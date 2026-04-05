@@ -45,6 +45,32 @@
         });
     }
 
+    /* ---------- Wave divider SVG injection ---------- */
+    var wavePaths = {
+        bg:      ['M0,60 C240,20 480,100 720,50 C960,0 1200,80 1440,60',
+                  'M0,100 C240,60 480,140 720,90 C960,40 1200,120 1440,100',
+                  'M0,145 C240,105 480,185 720,135 C960,85 1200,165 1440,145',
+                  'M0,180 C240,145 480,210 720,170 C960,130 1200,200 1440,180'],
+        surface: ['M0,60 C240,100 480,20 720,70 C960,120 1200,40 1440,60',
+                  'M0,100 C240,140 480,60 720,110 C960,160 1200,80 1440,100',
+                  'M0,145 C240,185 480,105 720,155 C960,205 1200,125 1440,145',
+                  'M0,180 C240,210 480,145 720,190 C960,220 1200,160 1440,180']
+    };
+
+    document.querySelectorAll('.wave-divider').forEach(function (div) {
+        var paths = div.classList.contains('wave-divider--to-bg') ? wavePaths.bg : wavePaths.surface;
+        var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('viewBox', '0 0 1440 220');
+        svg.setAttribute('preserveAspectRatio', 'none');
+        paths.forEach(function (d, i) {
+            var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            path.setAttribute('class', 'wave-layer wave-layer--' + (i + 1));
+            path.setAttribute('d', d + ' L1440,220 L0,220 Z');
+            svg.appendChild(path);
+        });
+        div.appendChild(svg);
+    });
+
     /* ---------- Page loaded state ---------- */
     // Triggers hero entrance animations via CSS
     window.addEventListener('load', function () {
