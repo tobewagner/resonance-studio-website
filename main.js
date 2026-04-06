@@ -81,7 +81,7 @@
     var parts = ['resonance', '.studio', '.berlin', '@', 'gmail', '.com'];
     var addr  = parts[0] + parts[1] + parts[2] + parts[3] + parts[4] + parts[5];
 
-    ['email-link', 'impressum-email'].forEach(function (id) {
+    ['email-link'].forEach(function (id) {
         var el = document.getElementById(id);
         if (el) {
             var a = document.createElement('a');
@@ -239,7 +239,6 @@
         );
 
     /* ---------- Hero parallax + Nav (combined scroll handler) ---------- */
-    var nav         = document.querySelector('.nav');
     var heroContent = document.querySelector('.hero__content');
     var hero        = document.querySelector('.hero');
     var scroller    = document.getElementById('page-scroll');
