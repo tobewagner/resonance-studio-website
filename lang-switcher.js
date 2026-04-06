@@ -129,6 +129,7 @@
     function switchLang(lang) {
         if (lang === currentLang) return;
         currentLang = lang;
+        if (window.__i18n) window.__i18n.lang = lang;
         setCookie('lang', lang);
         localStorage.setItem('lang', lang);
         applyTranslations(lang);
@@ -182,6 +183,7 @@
         .then(function (r) { return r.json(); })
         .then(function (data) {
             allStrings = data;
+            window.__i18n = { strings: allStrings, lang: currentLang };
             applyTranslations(currentLang);
             init();
         })

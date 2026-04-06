@@ -334,38 +334,66 @@
         reveals.forEach(function (el) { el.classList.add('revealed'); });
     }
 
-    /* ---------- Contact form (Formspree) ---------- */
-    var form   = document.getElementById('contact-form');
-    var status = document.getElementById('form-status');
+    /* ---------- Contact form (Web3Forms) ---------- */
+    var form       = document.getElementById('contact-form');
+    var status     = document.getElementById('form-status');
+    var formBtn    = document.getElementById('form-button');
+    var btnText    = formBtn ? formBtn.querySelector('.form__button-text') : null;
+    var WEB3FORMS_KEY = '3243cf91-6273-4e4d-a23a-5aa00a6cf094';
+
+    function i18n(key, fallback) {
+        var i = window.__i18n;
+        if (i && i.strings && i.strings[i.lang] && i.strings[i.lang][key] !== undefined) return i.strings[i.lang][key];
+        return fallback;
+    }
 
     if (form) {
         form.addEventListener('submit', function (e) {
             e.preventDefault();
 
-            var honeypot = form.querySelector('[name="website"]');
-            if (honeypot && honeypot.value) {
-                status.textContent = 'Thank you! Your message has been sent.';
-                form.reset();
-                return;
-            }
+            var nameVal = form.querySelector('[name="name"]').value.trim();
+            var emailVal = form.querySelector('[name="email"]').value.trim();
+            var msgVal = form.querySelector('[name="message"]').value.trim();
 
-            var data = new FormData(form);
+            if (!nameVal || !emailVal || !msgVal) return;
 
-            fetch(form.action, {
+            formBtn.disabled = true;
+            formBtn.classList.add('form__button--sending');
+            if (btnText) btnText.textContent = i18n('form_sending', 'Sending…');
+            status.textContent = '';
+            status.className = 'contact__status';
+
+            fetch('https://api.web3forms.com/submit', {
                 method: 'POST',
-                body: data,
-                headers: { 'Accept': 'application/json' }
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    access_key: WEB3FORMS_KEY,
+                    subject: 'Neue Kontaktanfrage — Resonance Studio Berlin',
+                    from_name: nameVal,
+                    email: emailVal,
+                    message: msgVal,
+                    botcheck: ''
+                })
             })
-            .then(function (response) {
-                if (response.ok) {
-                    status.textContent = 'Thank you! Your message has been sent.';
+            .then(function (r) { return r.json(); })
+            .then(function (data) {
+                if (data.success) {
+                    status.textContent = i18n('form_success', 'Thank you! Your message has been sent.');
+                    status.classList.add('contact__status--success');
                     form.reset();
                 } else {
-                    status.textContent = 'Oops — something went wrong. Please try again or email us directly.';
+                    status.textContent = i18n('form_error', 'Oops — something went wrong. Please try again or email us directly.');
+                    status.classList.add('contact__status--error');
                 }
             })
             .catch(function () {
-                status.textContent = 'Oops — something went wrong. Please try again or email us directly.';
+                status.textContent = i18n('form_error', 'Oops — something went wrong. Please try again or email us directly.');
+                status.classList.add('contact__status--error');
+            })
+            .finally(function () {
+                formBtn.disabled = false;
+                formBtn.classList.remove('form__button--sending');
+                if (btnText) btnText.textContent = i18n('form_send', 'Send Message');
             });
         });
     }

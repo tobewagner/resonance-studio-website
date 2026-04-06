@@ -350,13 +350,13 @@
                     <div id="map" class="location__map"></div>
                 </div>
                 <div class="location__info">
-                    <address class="location__address">
+                    <address class="location__address" data-i18n-html="location_address">
                         Boxhagener Straße 18<br>
                         10245 Berlin<br>
                         Hinterhof 2 / FG / B / 0
                     </address>
                     <div class="location__rule"></div>
-                    <p class="location__note">
+                    <p class="location__note" data-i18n="location_note">
                         In the heart of Friedrichshain — a rare find
                         for a recording studio in central Berlin.
                         Steps from Frankfurter Tor and public transport.
@@ -374,15 +374,9 @@
             <span class="section__label reveal" data-i18n="label_contact">Contact &amp; Booking</span>
             <div class="contact__grid">
                 <div class="contact__form-wrap reveal">
-                    <form action="https://formspree.io/f/YOUR_FORM_ID"
-                          method="POST"
-                          class="contact__form"
-                          id="contact-form">
-                        <!-- Honeypot -->
-                        <div class="form__honeypot" aria-hidden="true">
-                            <label for="website">Website</label>
-                            <input type="text" name="website" id="website" tabindex="-1" autocomplete="off">
-                        </div>
+                    <form class="contact__form" id="contact-form" novalidate>
+                        <!-- Honeypot (spam protection) -->
+                        <input type="hidden" name="botcheck" value="">
 
                         <div class="form__group">
                             <input type="text" name="name" id="name" class="form__input" placeholder=" " required>
@@ -402,11 +396,14 @@
                             <div class="form__line"></div>
                         </div>
 
-                        <button type="submit" class="form__button">
-                            <span data-i18n="form_send">Send Message</span>
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <button type="submit" class="form__button" id="form-button">
+                            <span class="form__button-text" data-i18n="form_send">Send Message</span>
+                            <svg class="form__button-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                                 <line x1="5" y1="12" x2="19" y2="12"></line>
                                 <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                            <svg class="form__button-spinner" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                                <path d="M12 2a10 10 0 0 1 10 10"></path>
                             </svg>
                         </button>
                     </form>
