@@ -107,7 +107,7 @@ body {
 
 #page-scroll {
     position: absolute;
-    top: var(--nav-h);
+    top: 0;
     left: 0;
     right: 0;
     bottom: 0;
@@ -115,7 +115,8 @@ body {
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
-    scroll-padding-top: 10px;
+    scroll-padding-top: var(--nav-h);
+    padding-top: var(--nav-h);
     scrollbar-color: var(--color-gold-dim) transparent;
 }
 
@@ -564,21 +565,30 @@ body::before {
     left: 0;
     right: 0;
     z-index: 200;
-    padding: 10px 0;
-    background: transparent;
+    height: var(--nav-h);
+    background: rgba(var(--color-bg-rgb), 0.1);
+    backdrop-filter: blur(1.8px);
+    -webkit-backdrop-filter: blur(1.8px);
     transition: background 0.4s, backdrop-filter 0.4s, -webkit-backdrop-filter 0.4s;
 }
 
 .nav--scrolled {
-    background: rgba(var(--color-bg-rgb), 0.85);
+    background: rgba(var(--color-bg-rgb), 0.4);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
+}
+
+.nav--menu-open {
+    background: rgba(var(--color-bg-rgb), 0.75);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
 }
 
 .nav__inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    height: 100%;
 }
 
 .nav__logo-link {
@@ -593,6 +603,15 @@ body::before {
     object-position: left;
     opacity: 0.8;
     transition: opacity 0.3s;
+    filter: drop-shadow(0 0 9px rgba(var(--color-bg-rgb), 0.55))
+            drop-shadow(0 0 22px rgba(var(--color-bg-rgb), 0.385))
+            drop-shadow(0 0 44px rgba(var(--color-bg-rgb), 0.22));
+}
+
+[data-theme="light"] .nav__logo {
+    filter: drop-shadow(0 0 9px rgba(var(--color-bg-rgb), 0.66))
+            drop-shadow(0 0 22px rgba(var(--color-bg-rgb), 0.462))
+            drop-shadow(0 0 44px rgba(var(--color-bg-rgb), 0.264));
 }
 
 .nav__logo--full {
@@ -639,6 +658,17 @@ body::before {
     opacity: 0.7;
     transition: opacity 0.3s;
     position: relative;
+    text-shadow:
+        0 0 14px rgba(var(--color-bg-rgb), 0.92),
+        0 0 35px rgba(var(--color-bg-rgb), 0.69),
+        0 0 69px rgba(var(--color-bg-rgb), 0.46);
+}
+
+[data-theme="light"] .nav__link {
+    text-shadow:
+        0 0 14px rgba(var(--color-bg-rgb), 1),
+        0 0 35px rgba(var(--color-bg-rgb), 0.828),
+        0 0 69px rgba(var(--color-bg-rgb), 0.552);
 }
 
 .nav__link::after {
@@ -780,8 +810,9 @@ body::before {
    ============================ */
 .hero {
     position: relative;
-    height: calc(100vh - var(--nav-h));
-    height: calc(100svh - var(--nav-h));
+    height: 100vh;
+    height: 100svh;
+    margin-top: calc(-1 * var(--nav-h));
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1636,6 +1667,11 @@ body.loaded .anim-fade-up {
 /* ============================
    SUBPAGES (Legal, Privacy)
    ============================ */
+.subpage#page-scroll {
+    top: 0;
+    padding-top: 0;
+    scroll-padding-top: 0;
+}
 .subpage {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;

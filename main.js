@@ -12,6 +12,7 @@
     function getPreferredTheme() {
         var stored = localStorage.getItem('theme');
         if (stored) return stored;
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) return 'light';
         return 'dark';
     }
 
@@ -117,6 +118,13 @@
         burger.classList.toggle('active');
         burger.setAttribute('aria-expanded', isOpen);
         document.body.style.overflow = isOpen ? 'hidden' : '';
+        if (nav) {
+            if (isOpen) {
+                nav.classList.add('nav--menu-open');
+            } else {
+                nav.classList.remove('nav--menu-open');
+            }
+        }
     }
 
     function closeMenu() {
@@ -124,6 +132,9 @@
         burger.classList.remove('active');
         burger.setAttribute('aria-expanded', 'false');
         document.body.style.overflow = '';
+        if (nav) {
+            nav.classList.remove('nav--menu-open');
+        }
     }
 
     if (burger && mobileMenu) {
