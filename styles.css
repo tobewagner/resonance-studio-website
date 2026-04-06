@@ -116,13 +116,13 @@ body {
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
     scroll-padding-top: 10px;
-    scrollbar-color: var(--color-gold-dim) rgba(var(--color-bg-rgb), 0.15);
+    scrollbar-color: var(--color-gold-dim) transparent;
 }
 
 #page-scroll::-webkit-scrollbar,
 .mobile-menu::-webkit-scrollbar { width: 8px; }
 #page-scroll::-webkit-scrollbar-track,
-.mobile-menu::-webkit-scrollbar-track { background: rgba(var(--color-bg-rgb), 0.15); }
+.mobile-menu::-webkit-scrollbar-track { background: transparent; }
 #page-scroll::-webkit-scrollbar-thumb,
 .mobile-menu::-webkit-scrollbar-thumb { background: var(--color-gold-dim); border-radius: 4px; }
 #page-scroll::-webkit-scrollbar-thumb:hover,
@@ -406,7 +406,6 @@ input, textarea, select {
     z-index: 1;
     width: 100%;
     height: var(--divider-h);
-    overflow: hidden;
     line-height: 0;
     margin-top: calc(var(--divider-h) / -2);
     margin-bottom: calc(var(--divider-h) / -2);
@@ -432,7 +431,8 @@ input, textarea, select {
 .wave-divider svg {
     display: block;
     width: 100%;
-    height: 100%;
+    height: calc(100% + 4px);
+    margin: -2px 0;
 }
 
 /* Three wave layers — three distinct reds from the palette:
@@ -521,17 +521,10 @@ body::before {
     padding: calc(var(--section-pad) * 0.7) 0 calc(var(--section-pad) * 0.8);
     position: relative;
     z-index: 0;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
 }
 
-.section::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: inherit;
-}
 
 .section__label {
     display: block;
@@ -730,7 +723,7 @@ body::before {
     padding: 0 env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    scrollbar-color: var(--color-gold-dim) rgba(var(--color-bg-rgb), 0.15);
+    scrollbar-color: var(--color-gold-dim) transparent;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.5s var(--ease-out-expo);
