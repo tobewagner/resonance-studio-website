@@ -81,13 +81,15 @@
     var parts = ['resonance', '.studio', '.berlin', '@', 'gmail', '.com'];
     var addr  = parts[0] + parts[1] + parts[2] + parts[3] + parts[4] + parts[5];
 
-    var emailContainer = document.getElementById('email-link');
-    if (emailContainer) {
-        var a = document.createElement('a');
-        a.href = 'mai' + 'lto:' + addr;
-        a.textContent = addr;
-        emailContainer.appendChild(a);
-    }
+    ['email-link', 'impressum-email'].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) {
+            var a = document.createElement('a');
+            a.href = 'mai' + 'lto:' + addr;
+            a.textContent = addr;
+            el.appendChild(a);
+        }
+    });
 
     /* ---------- Anchor scroll within #page-scroll ---------- */
     var pageScroll = document.getElementById('page-scroll');
@@ -365,7 +367,7 @@
         var tBaseSpeed = 57.6;  // pixels per second (≈0.96px @ 60fps)
         var tVelocity  = -tBaseSpeed;
         var tIsMobile  = 'ontouchstart' in window;
-        var tFriction  = tIsMobile ? 0.99 : 0.995;
+        var tFriction  = tIsMobile ? 0.985 : 0.99;
         var tOffset    = 0;
         var tSetW      = 0;
         var tOrigHTML  = tTrack.innerHTML;
@@ -455,9 +457,8 @@
                     if (Math.abs(diff) < 0.5) {
                         tVelocity = target;
                     } else if (Math.abs(tVelocity) > tBaseSpeed * 1.2) {
-                        // Phase 1: fast momentum — apply friction
-                        var frictionPerSec = Math.pow(tFriction, 60);
-                        tVelocity *= Math.pow(frictionPerSec, dt);
+                        // Phase 1: fast momentum — apply friction (tFriction^60 per second)
+                        tVelocity *= Math.pow(tFriction, 60 * dt);
                     } else {
                         // Phase 2: linear accel toward target
                         if (diff < 0) {
@@ -502,7 +503,7 @@
             var now = Date.now();
             var dt = now - tLastTime;
             if (dt > 0) {
-                tVelocity = (pt.clientX - tLastX) / Math.max(dt, 8) * 16;
+                tVelocity = (pt.clientX - tLastX) / dt * 1000; // px/second
             }
             tLastX = pt.clientX;
             tLastTime = now;
