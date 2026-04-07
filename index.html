@@ -17,6 +17,8 @@
     <meta property="og:title" content="Resonance Studio Berlin — Recording, Mixing & Mastering">
     <meta property="og:description" content="Professional recording studio in Friedrichshain, Berlin. Vintage and modern microphones, dedicated control room and live room, steps from Frankfurter Tor.">
     <meta property="og:image" content="https://studio-resonance.net/images/RSB-interior1-edit1-IMG_8756.jpg">
+    <meta property="og:image:width" content="4032">
+    <meta property="og:image:height" content="3024">
     <meta property="og:url" content="https://studio-resonance.net/">
     <meta property="og:locale" content="en_GB">
     <meta property="og:site_name" content="Resonance Studio Berlin">
@@ -26,6 +28,7 @@
     <meta name="twitter:title" content="Resonance Studio Berlin — Recording, Mixing & Mastering">
     <meta name="twitter:description" content="Professional recording studio in Friedrichshain, Berlin. Vintage and modern microphones, steps from Frankfurter Tor.">
     <meta name="twitter:image" content="https://studio-resonance.net/images/RSB-interior1-edit1-IMG_8756.jpg">
+    <meta name="twitter:image:alt" content="Resonance Studio Berlin control room with studio monitors and acoustic treatment">
 
     <!-- Misc -->
     <meta name="theme-color" content="#2D0B12">
@@ -40,6 +43,7 @@
         "description": "Recording, mixing and mastering studio in the heart of Friedrichshain, Berlin, with professional acoustic treatment and a curated selection of vintage and modern microphones.",
         "url": "https://studio-resonance.net/",
         "image": "https://studio-resonance.net/images/RSB-interior1-edit1-IMG_8756.jpg",
+        "logo": "https://studio-resonance.net/images/SRB-Logo-MH8b-full-red.svg",
         "address": {
             "@type": "PostalAddress",
             "streetAddress": "Boxhagener Straße 18, Hinterhof 2 / FG / B / 0",
@@ -57,8 +61,19 @@
             "@type": "City",
             "name": "Berlin"
         },
+        "email": "resonance.studio.berlin@gmail.com",
+        "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "description": "By appointment only"
+        },
+        "priceRange": "$$",
         "knowsLanguage": ["en", "de"],
         "additionalType": "https://schema.org/MusicVenue",
+        "employee": {
+            "@type": "Person",
+            "name": "Matteo Hoyer",
+            "jobTitle": "Studio Manager"
+        },
         "sameAs": [
             "https://www.instagram.com/resonancestudioberlin/"
         ]
@@ -67,6 +82,11 @@
 
     <link rel="stylesheet" href="styles.css">
 
+
+    <!-- Preconnect external resources -->
+    <link rel="preconnect" href="https://maps.googleapis.com">
+    <link rel="preconnect" href="https://maps.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://flagcdn.com">
 
     <!-- Preload hero image -->
     <link rel="preload" as="image" href="images/RSB-interior1-edit1-IMG_8756.webp" type="image/webp">
@@ -155,7 +175,8 @@
                 <source srcset="images/RSB-interior1-edit1-IMG_8756.webp" type="image/webp">
                 <img src="images/RSB-interior1-edit1-IMG_8756.jpg"
                      alt="Resonance Studio Berlin control room with studio monitors, acoustic ceiling panels, mixing desk, and window looking into the live recording room"
-                     class="hero__image">
+                     class="hero__image"
+                     width="4032" height="3024">
             </picture>
             <div class="hero__overlay"></div>
         </div>
@@ -200,7 +221,7 @@
             <span class="section__label reveal" data-i18n="label_creators">Creators</span>
             <div class="creators reveal">
                 <div class="creator">
-                    <img src="images/creators/Tobias.webp" alt="Tobias Wagner" class="creator__img">
+                    <img src="images/creators/Tobias.webp" alt="Tobias Wagner" class="creator__img" width="458" height="550">
                     <div class="creator__info">
                         <h4 class="creator__name">Tobias Wagner</h4>
                         <p class="creator__bio" data-i18n="creator_tobias_bio">Musician, technologist and creative strategist. Tobias bridges the gap between artistry and technology, ensuring every project finds its unique voice.</p>
@@ -208,7 +229,7 @@
                 </div>
                 <div class="creator">
                     <div class="creator__avatar">
-                        <img src="images/creators/Matteo.webp" alt="Matteo Hoyer — Studio Manager" class="creator__img">
+                        <img src="images/creators/Matteo.webp" alt="Matteo Hoyer — Studio Manager" class="creator__img" width="1024" height="1024">
                         <a href="https://www.instagram.com/matteohoyermusic" target="_blank" rel="noopener noreferrer" class="creator__social" aria-label="Matteo Hoyer on Instagram">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
                         </a>
@@ -305,34 +326,34 @@
             <span class="section__label reveal" data-i18n="label_gallery">Gallery</span>
             <div class="reveal"><div class="gallery__grid">
                 <figure class="gallery__item">
-                    <img src="images/gallery/IMG_8742.webp" alt="Live room overview — upright piano, burgundy carpet, acoustic panels and warm recessed lighting" class="gallery__img">
+                    <img src="images/gallery/IMG_8742.webp" alt="Live room overview — upright piano, burgundy carpet, acoustic panels and warm recessed lighting" class="gallery__img" width="1800" height="1350">
                 </figure>
                 <figure class="gallery__item">
-                    <img src="images/gallery/IMG_9117.webp" alt="Large diaphragm condenser microphone in the live room with burgundy acoustic ceiling" class="gallery__img">
+                    <img src="images/gallery/IMG_9117.webp" alt="Large diaphragm condenser microphone in the live room with burgundy acoustic ceiling" class="gallery__img" width="1800" height="2400">
                 </figure>
                 <figure class="gallery__item">
-                    <img src="images/gallery/IMG_9070.webp" alt="Engineer at the DAW during a mixing session" class="gallery__img">
+                    <img src="images/gallery/IMG_9070.webp" alt="Engineer at the DAW during a mixing session" class="gallery__img" width="1800" height="1800">
                 </figure>
                 <figure class="gallery__item">
-                    <img src="images/gallery/IMG_9122.webp" alt="Austrian Audio microphone in the live room with piano and window to control room" class="gallery__img">
+                    <img src="images/gallery/IMG_9122.webp" alt="Austrian Audio microphone in the live room with piano and window to control room" class="gallery__img" width="1800" height="2674">
                 </figure>
                 <figure class="gallery__item">
-                    <img src="images/gallery/IMG_9140.webp" alt="Live room showing burgundy acoustic panels, wood ceiling, and window to the control room" class="gallery__img">
+                    <img src="images/gallery/IMG_9140.webp" alt="Live room showing burgundy acoustic panels, wood ceiling, and window to the control room" class="gallery__img" width="1800" height="2400">
                 </figure>
                 <figure class="gallery__item">
-                    <img src="images/gallery/IMG_9513.webp" alt="Control room workstation — studio monitors, MIDI keyboard, and dual screens" class="gallery__img">
+                    <img src="images/gallery/IMG_9513.webp" alt="Control room workstation — studio monitors, MIDI keyboard, and dual screens" class="gallery__img" width="1206" height="1206">
                 </figure>
                 <figure class="gallery__item">
-                    <img src="images/gallery/IMG_9496.webp" alt="Neumann small diaphragm condenser microphone close-up" class="gallery__img">
+                    <img src="images/gallery/IMG_9496.webp" alt="Neumann small diaphragm condenser microphone close-up" class="gallery__img" width="1800" height="2400">
                 </figure>
                 <figure class="gallery__item">
-                    <img src="images/gallery/IMG_9123.webp" alt="Large condenser microphone macro shot in shockmount" class="gallery__img">
+                    <img src="images/gallery/IMG_9123.webp" alt="Large condenser microphone macro shot in shockmount" class="gallery__img" width="1800" height="2400">
                 </figure>
                 <figure class="gallery__item">
-                    <img src="images/gallery/IMG_9078.webp" alt="Live room set up for recording — multiple microphone stands, piano, and burgundy accent wall" class="gallery__img">
+                    <img src="images/gallery/IMG_9078.webp" alt="Live room set up for recording — multiple microphone stands, piano, and burgundy accent wall" class="gallery__img" width="1800" height="2400">
                 </figure>
                 <figure class="gallery__item">
-                    <img src="images/gallery/IMG_9093.webp" alt="Live room wide angle — mic stands, cables, burgundy wall and acoustic treatment" class="gallery__img">
+                    <img src="images/gallery/IMG_9093.webp" alt="Live room wide angle — mic stands, cables, burgundy wall and acoustic treatment" class="gallery__img" width="1800" height="2400">
                 </figure>
             </div></div>
         </div>
