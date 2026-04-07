@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Notice — Resonance Studio Berlin</title>
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#2D0B12">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="subpage" id="page-scroll">
+
+        <header class="subpage-header">
+            <div class="container subpage-header__inner">
+                <a href="index.html" class="subpage-back" aria-label="Back to homepage">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                    <span data-i18n="subpage_back">Back</span>
+                </a>
+                <a href="index.html" class="subpage-logo">
+                    <img src="images/SRB-Logo-MH8b-full-beige.svg" alt="Resonance Studio Berlin" class="subpage-logo__img subpage-logo--full logo--dark">
+                    <img src="images/SRB-Logo-MH8b-full-red.svg" alt="Resonance Studio Berlin" class="subpage-logo__img subpage-logo--full logo--light">
+                    <img src="images/Resonance_transparent_logo_white.png" alt="Resonance Studio Berlin" class="subpage-logo__img subpage-logo--icon logo--dark">
+                    <img src="images/Resonance_transparent_logo.png" alt="Resonance Studio Berlin" class="subpage-logo__img subpage-logo--icon logo--light">
+                </a>
+                <div class="subpage-header__actions">
+                    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">
+                        <svg class="theme-toggle__moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                        </svg>
+                        <svg class="theme-toggle__sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <line x1="12" y1="1" x2="12" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="23"></line>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                            <line x1="1" y1="12" x2="3" y2="12"></line>
+                            <line x1="21" y1="12" x2="23" y2="12"></line>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                        </svg>
+                    </button>
+                    <div class="lang-switcher" id="lang-switcher">
+                        <button class="lang-btn" id="lang-btn">
+                            <img id="lang-flag" class="lang-flag" src="" alt="">
+                            <span id="lang-name"></span>
+                        </button>
+                        <div class="lang-dropdown" id="lang-dropdown"></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="subpage-main">
+            <div class="container">
+                <h1 class="subpage-title" data-i18n="label_impressum">Legal Notice</h1>
+
+                <div class="subpage-section">
+                    <h2 data-i18n="impressum_info_title">Information pursuant to &sect; 5 DDG</h2>
+                    <p>Tobias Wagner<br>
+                    Boxhagener Stra&szlig;e 18<br>
+                    10245 Berlin<br>
+                    Germany</p>
+                </div>
+
+                <div class="subpage-section">
+                    <h2 data-i18n="impressum_contact">Contact</h2>
+                    <p>E-Mail: <span id="legal-email"></span></p>
+                </div>
+
+                <div class="subpage-section">
+                    <h2 data-i18n="impressum_content_title">Responsible for content pursuant to &sect; 18 (2) MStV</h2>
+                    <p>Tobias Wagner<br>
+                    Boxhagener Stra&szlig;e 18<br>
+                    10245 Berlin</p>
+                </div>
+
+                <div class="subpage-section">
+                    <h2 data-i18n="impressum_disclaimer_title">Disclaimer</h2>
+                    <p data-i18n="impressum_disclaimer">The content of this website has been created with the utmost care. However, no guarantee can be given for the accuracy, completeness, or timeliness of the content.</p>
+                </div>
+
+                <div class="subpage-section">
+                    <h2 data-i18n="impressum_links_title">Liability for Links</h2>
+                    <p data-i18n="impressum_links">This website contains links to external third-party websites, over whose content we have no control. Therefore, we cannot accept any liability for this external content. The respective provider or operator of the linked pages is always responsible for their content.</p>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="container footer__inner">
+                <span class="footer__copy"><span class="footer__copyright">&copy;</span> <span data-i18n="footer_copy">2026 Resonance Studio Berlin</span></span>
+                <nav class="footer__links">
+                    <a href="legal.html" class="footer__link" data-i18n="footer_impressum">Legal Notice</a>
+                    <span class="footer__sep">|</span>
+                    <a href="privacy.html" class="footer__link" data-i18n="footer_privacy">Privacy Policy</a>
+                </nav>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+    (function () {
+        'use strict';
+        var root = document.documentElement;
+        var themeBtn = document.getElementById('theme-toggle');
+        function getPreferredTheme() {
+            var stored = localStorage.getItem('theme');
+            if (stored) return stored;
+            return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        }
+        function applyTheme(t) {
+            root.setAttribute('data-theme', t);
+            localStorage.setItem('theme', t);
+            document.cookie = 'theme=' + t + ';path=/;max-age=31536000';
+        }
+        applyTheme(getPreferredTheme());
+        if (themeBtn) {
+            themeBtn.addEventListener('click', function () {
+                applyTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+            });
+        }
+        var parts = ['resonance', '.studio', '.berlin', '@', 'gmail', '.com'];
+        var addr  = parts[0] + parts[1] + parts[2] + parts[3] + parts[4] + parts[5];
+        var el = document.getElementById('legal-email');
+        if (el) {
+            var a = document.createElement('a');
+            a.href = 'mai' + 'lto:' + addr;
+            a.textContent = addr;
+            el.appendChild(a);
+        }
+        document.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+        document.addEventListener('copy', function (e) { e.preventDefault(); });
+    })();
+    </script>
+    <script src="lang-switcher.js"></script>
+</body>
+</html>
