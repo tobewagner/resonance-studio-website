@@ -214,40 +214,6 @@
         requestAnimationFrame(navFit);
     });
 
-    /* ---------- Leaflet map ---------- */
-    var LAT = 52.51334;
-    var LNG = 13.45558;
-
-    var map = L.map('map', {
-        center: [LAT, LNG],
-        zoom: 15,
-        zoomControl: true,
-        scrollWheelZoom: false
-    });
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(map);
-
-    var markerIcon = L.divIcon({
-        className: 'map-marker',
-        html: '<svg width="32" height="44" viewBox="0 0 32 44" fill="none" xmlns="http://www.w3.org/2000/svg">' +
-              '<path d="M16 0C7.164 0 0 7.164 0 16c0 12 16 28 16 28s16-16 16-28C32 7.164 24.836 0 16 0z" fill="#9D192A"/>' +
-              '<circle cx="16" cy="15" r="6" fill="rgb(248,244,234)"/>' +
-              '</svg>',
-        iconSize: [32, 44],
-        iconAnchor: [16, 44],
-        popupAnchor: [0, -40]
-    });
-
-    L.marker([LAT, LNG], { icon: markerIcon })
-        .addTo(map)
-        .bindPopup(
-            '<strong>Resonance Studio Berlin</strong><br>' +
-            'Boxhagener Str. 18, Hinterhof 2<br>' +
-            '10245 Berlin'
-        );
 
     /* ---------- Hero parallax + Nav (combined scroll handler) ---------- */
     var heroContent = document.querySelector('.hero__content');
