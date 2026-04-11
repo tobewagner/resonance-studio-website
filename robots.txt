@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /file_pool/
+
+Sitemap: https://studio-resonance.net/sitemap.xml

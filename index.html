@@ -4,16 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resonance Studio Berlin — Recording, Mixing & Mastering</title>
-    <meta name="description" content="Recording, mixing and mastering studio in Friedrichshain, Berlin. Professional acoustic treatment, vintage and modern microphones, control room and live room in the heart of Boxi Kiez near Boxhagener Platz.">
+    <meta name="description" content="Recording, mixing and mastering studio in Friedrichshain, Berlin. Professional acoustic treatment, vintage and modern microphones, control room and live room in the heart of Boxi Kiez near Frankfurter Tor.">
 
-    <!-- Canonical — replace with your actual domain -->
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- Canonical -->
     <link rel="canonical" href="https://studio-resonance.net/">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Resonance Studio Berlin — Recording, Mixing & Mastering">
-    <meta property="og:description" content="Professional recording studio in Friedrichshain, Berlin. Vintage and modern microphones, dedicated control room and live room, steps from Boxhagener Platz.">
+    <meta property="og:description" content="Professional recording studio in Friedrichshain, Berlin. Vintage and modern microphones, dedicated control room and live room, steps from Frankfurter Tor.">
     <meta property="og:image" content="https://studio-resonance.net/images/RSB-interior1-edit1-IMG_8756.jpg">
+    <meta property="og:image:width" content="4032">
+    <meta property="og:image:height" content="3024">
     <meta property="og:url" content="https://studio-resonance.net/">
     <meta property="og:locale" content="en_GB">
     <meta property="og:site_name" content="Resonance Studio Berlin">
@@ -21,11 +26,12 @@
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Resonance Studio Berlin — Recording, Mixing & Mastering">
-    <meta name="twitter:description" content="Professional recording studio in Friedrichshain, Berlin. Vintage and modern microphones, steps from Boxhagener Platz.">
+    <meta name="twitter:description" content="Professional recording studio in Friedrichshain, Berlin. Vintage and modern microphones, steps from Frankfurter Tor.">
     <meta name="twitter:image" content="https://studio-resonance.net/images/RSB-interior1-edit1-IMG_8756.jpg">
+    <meta name="twitter:image:alt" content="Resonance Studio Berlin control room with studio monitors and acoustic treatment">
 
     <!-- Misc -->
-    <meta name="theme-color" content="#110b0e">
+    <meta name="theme-color" content="#2D0B12">
     <meta name="robots" content="index, follow">
 
     <!-- JSON-LD Structured Data -->
@@ -37,9 +43,10 @@
         "description": "Recording, mixing and mastering studio in the heart of Friedrichshain, Berlin, with professional acoustic treatment and a curated selection of vintage and modern microphones.",
         "url": "https://studio-resonance.net/",
         "image": "https://studio-resonance.net/images/RSB-interior1-edit1-IMG_8756.jpg",
+        "logo": "https://studio-resonance.net/images/SRB-Logo-MH8b-full-red.svg",
         "address": {
             "@type": "PostalAddress",
-            "streetAddress": "Boxhagener Straße 18, Hinterhof 2",
+            "streetAddress": "Boxhagener Straße 18, Hinterhof 2 / FG / B / 0",
             "addressLocality": "Berlin",
             "addressRegion": "Berlin",
             "postalCode": "10245",
@@ -54,162 +61,421 @@
             "@type": "City",
             "name": "Berlin"
         },
+        "email": "resonance.studio.berlin@gmail.com",
+        "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "description": "By appointment only"
+        },
+        "priceRange": "$$",
         "knowsLanguage": ["en", "de"],
-        "additionalType": "https://schema.org/MusicVenue"
+        "additionalType": "https://schema.org/MusicVenue",
+        "employee": {
+            "@type": "Person",
+            "name": "Matteo Hoyer",
+            "jobTitle": "Studio Manager"
+        },
+        "sameAs": [
+            "https://www.instagram.com/resonancestudioberlin/"
+        ]
     }
     </script>
 
     <link rel="stylesheet" href="styles.css">
 
-    <!-- Leaflet CSS for the map -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-          crossorigin="">
+
+    <!-- Preconnect external resources -->
+    <link rel="preconnect" href="https://maps.googleapis.com">
+    <link rel="preconnect" href="https://maps.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://flagcdn.com">
 
     <!-- Preload hero image -->
-    <link rel="preload" as="image" href="images/RSB-interior1-edit1-IMG_8756.jpg">
+    <link rel="preload" as="image" href="images/RSB-interior1-edit1-IMG_8756.webp" type="image/webp">
 </head>
 <body>
-
     <!-- ====== NAV ====== -->
     <nav class="nav" id="nav">
         <div class="container nav__inner">
             <a href="#hero" class="nav__logo-link">
-                <img
-                    src="images/SRB-Logo-MH8b-full-beige.svg"
-                    alt="Resonance Studio Berlin — back to top"
-                    class="nav__logo"
-                >
+                <img src="images/SRB-Logo-MH8b-full-beige.svg"
+                     alt="Resonance Studio Berlin — back to top"
+                     class="nav__logo nav__logo--full logo--dark">
+                <img src="images/SRB-Logo-MH8b-full-red.svg"
+                     alt="Resonance Studio Berlin — back to top"
+                     class="nav__logo nav__logo--full logo--light">
+                <img src="images/Resonance_transparent_logo_white.png"
+                     alt="Resonance Studio Berlin — back to top"
+                     class="nav__logo nav__logo--icon logo--dark">
+                <img src="images/Resonance_transparent_logo.png"
+                     alt="Resonance Studio Berlin — back to top"
+                     class="nav__logo nav__logo--icon logo--light">
             </a>
-            <a href="#contact" class="nav__link">Contact</a>
+            <div class="nav__links" id="nav-links">
+                <a href="#about" class="nav__link" data-i18n="nav_about">About</a>
+                <a href="#creators" class="nav__link" data-i18n="nav_creators">Creators</a>
+                <a href="#clients" class="nav__link" data-i18n="nav_references">References</a>
+                <a href="#services" class="nav__link" data-i18n="nav_services">Services</a>
+                <a href="#studio" class="nav__link" data-i18n="nav_studio">Studio</a>
+                <a href="#gallery" class="nav__link" data-i18n="nav_gallery">Gallery</a>
+                <a href="#contact" class="nav__link" data-i18n="nav_contact">Contact</a>
+            </div>
+            <div class="nav__actions">
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">
+                <svg class="theme-toggle__moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+                <svg class="theme-toggle__sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+            </button>
+            <div class="lang-switcher" id="lang-switcher">
+                <button class="lang-btn" id="lang-btn">
+                    <img id="lang-flag" class="lang-flag" src="" alt="">
+                    <span id="lang-name"></span>
+                </button>
+                <div class="lang-dropdown" id="lang-dropdown"></div>
+            </div>
+            <button class="nav__burger" id="nav-burger" aria-label="Open menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            </div>
         </div>
     </nav>
+
+    <!-- ====== MOBILE MENU ====== -->
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-menu__inner">
+            <a href="#about" class="mobile-menu__link" data-i18n="nav_about">About</a>
+            <a href="#creators" class="mobile-menu__link" data-i18n="nav_creators">Creators</a>
+            <a href="#clients" class="mobile-menu__link" data-i18n="nav_references">References</a>
+            <a href="#services" class="mobile-menu__link" data-i18n="nav_services">Services</a>
+            <a href="#studio" class="mobile-menu__link" data-i18n="nav_studio">Studio</a>
+            <a href="#gallery" class="mobile-menu__link" data-i18n="nav_gallery">Gallery</a>
+            <a href="#location" class="mobile-menu__link" data-i18n="nav_location">Location</a>
+            <a href="#contact" class="mobile-menu__link" data-i18n="nav_contact">Contact</a>
+        </div>
+    </div>
+
+    <!-- ====== SCROLL CONTAINER ====== -->
+    <div id="page-scroll">
 
     <!-- ====== HERO ====== -->
     <section class="hero" id="hero">
         <div class="hero__image-wrap">
-            <img
-                src="images/RSB-interior1-edit1-IMG_8756.jpg"
-                alt="Resonance Studio Berlin control room with studio monitors, acoustic ceiling panels, mixing desk, and window looking into the live recording room"
-                class="hero__image"
-            >
+            <picture>
+                <source srcset="images/RSB-interior1-edit1-IMG_8756.webp" type="image/webp">
+                <img src="images/RSB-interior1-edit1-IMG_8756.jpg"
+                     alt="Resonance Studio Berlin control room with studio monitors, acoustic ceiling panels, mixing desk, and window looking into the live recording room"
+                     class="hero__image"
+                     width="4032" height="3024">
+            </picture>
             <div class="hero__overlay"></div>
         </div>
         <div class="hero__content">
-            <img
-                src="images/SRB-Logo-MH8b-full-beige.svg"
-                alt="Resonance Studio Berlin logo"
-                class="hero__logo"
-            >
+            <img src="images/SRB-Logo-MH8b-full-beige.svg"
+                 alt="Resonance Studio Berlin logo"
+                 class="hero__logo anim-fade-in logo--dark">
+            <img src="images/SRB-Logo-MH8b-full-red.svg"
+                 alt="Resonance Studio Berlin logo"
+                 class="hero__logo anim-fade-in logo--light">
             <h1 class="hero__title">Resonance Studio Berlin</h1>
-            <p class="hero__sub">Recording, Mixing &amp; Mastering in the heart of Friedrichshain</p>
+            <div class="hero__rule anim-draw"></div>
+            <p class="hero__sub anim-fade-up" data-i18n-html="hero_sub">Recording, Mixing &amp; Mastering<br>in the heart of Friedrichshain</p>
         </div>
-        <a href="#about" class="hero__scroll" aria-label="Scroll down">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="6 9 12 15 18 9"></polyline>
-            </svg>
-        </a>
+                <div class="wave-divider wave-divider--hero wave-divider--to-bg" aria-hidden="true"></div>
     </section>
 
     <!-- ====== ABOUT ====== -->
-    <section class="section about reveal" id="about">
+    <section class="section about" id="about">
         <div class="container">
-            <p class="about__text">
-                Located minutes from the vibrant Boxi Kiez and public transportation.
-                Our mics range from vintage warmth to modern sparkle.
-            </p>
+            <div class="reveal">
+                <span class="section__label" data-i18n="label_about">About</span>
+                <p class="about__text" data-i18n="about_text_1">
+                    A creative space built for sound — professional acoustic treatment,
+                    a curated collection of vintage and modern microphones, and the
+                    analog warmth that digital alone can't replicate.
+                </p>
+                <p class="about__text about__text--secondary" data-i18n="about_text_2">
+                    Located minutes from Frankfurter Tor in the vibrant Boxi Kiez,
+                    Resonance Studio Berlin offers an environment where music is
+                    captured with character and intention.
+                </p>
+            </div>
         </div>
     </section>
 
-    <!-- ====== LOCATION ====== -->
-    <section class="section location reveal" id="location">
+        <div class="wave-divider wave-divider--to-surface" aria-hidden="true"></div>
+
+    <!-- ====== CREATORS ====== -->
+    <section class="section creators-section" id="creators">
         <div class="container">
-            <h2 class="section__heading">Location</h2>
-            <div class="location__grid">
+            <span class="section__label reveal" data-i18n="label_creators">Creators</span>
+            <div class="creators reveal">
+                <div class="creator">
+                    <img src="images/creators/Tobias.webp" alt="Tobias Wagner" class="creator__img" width="458" height="550">
+                    <div class="creator__info">
+                        <h4 class="creator__name">Tobias Wagner</h4>
+                        <p class="creator__bio" data-i18n="creator_tobias_bio">Musician, technologist and creative strategist. Tobias bridges the gap between artistry and technology, ensuring every project finds its unique voice.</p>
+                    </div>
+                </div>
+                <div class="creator">
+                    <div class="creator__avatar">
+                        <img src="images/creators/Matteo.webp" alt="Matteo Hoyer — Studio Manager" class="creator__img" width="1024" height="1024">
+                        <a href="https://www.instagram.com/matteohoyermusic" target="_blank" rel="noopener noreferrer" class="creator__social" aria-label="Matteo Hoyer on Instagram">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+                        </a>
+                    </div>
+                    <div class="creator__info">
+                        <h4 class="creator__name">Matteo Hoyer</h4>
+                        <p class="creator__bio" data-i18n="creator_matteo_bio">Sound engineer and producer with a deep passion for analog recording. Matteo shapes the sonic identity of Resonance Studio — from mic placement to final master.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="wave-divider wave-divider--to-bg" aria-hidden="true"></div>
+
+    <!-- ====== CLIENTS ====== -->
+    <section class="section clients" id="clients">
+        <div class="ticker" id="ticker">
+            <div class="ticker__track" id="ticker-track">
+                <div class="ticker__item"><img src="images/logos/mercedes-white.webp" alt="Mercedes-Benz" class="ticker__logo ticker__logo--mercedes logo--dark"><img src="images/logos/mercedes-color.webp" alt="Mercedes-Benz" class="ticker__logo ticker__logo--mercedes logo--light"></div>
+                <div class="ticker__item"><img src="images/logos/ard-white.webp" alt="ARD" class="ticker__logo logo--dark"><img src="images/logos/ard-color.webp" alt="ARD" class="ticker__logo logo--light"></div>
+                <div class="ticker__item"><img src="images/logos/zdf-white.webp" alt="ZDF" class="ticker__logo ticker__logo--zdf logo--dark"><img src="images/logos/zdf-color.webp" alt="ZDF" class="ticker__logo ticker__logo--zdf logo--light"></div>
+                <div class="ticker__item"><img src="images/logos/audi-white.webp" alt="Audi" class="ticker__logo ticker__logo--audi logo--dark"><img src="images/logos/audi-color.webp" alt="Audi" class="ticker__logo ticker__logo--audi logo--light"></div>
+                <div class="ticker__item"><img src="images/logos/orchestral-tools-white.webp" alt="Orchestral Tools" class="ticker__logo ticker__logo--ot logo--dark"><img src="images/logos/orchestral-tools-color.webp" alt="Orchestral Tools" class="ticker__logo ticker__logo--ot logo--light"></div>
+                <div class="ticker__item"><span class="ticker__person"><span class="ticker__name">Mark Plati</span><span class="ticker__role">David Bowie / Producer</span></span></div>
+                <div class="ticker__item"><span class="ticker__person"><span class="ticker__name">Doug Yowell</span><span class="ticker__role">Drums / Percussion</span></span></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="wave-divider wave-divider--to-surface" aria-hidden="true"></div>
+
+    <!-- ====== SERVICES ====== -->
+    <section class="section services" id="services">
+        <div class="container">
+            <span class="section__label reveal" data-i18n="label_services">Services</span>
+            <div class="services__grid">
+                <article class="service-card reveal">
+
+                    <h3 class="service-card__title" data-i18n="service_recording_title">Recording</h3>
+                    <p class="service-card__desc" data-i18n="service_recording_desc">From intimate solo sessions to full band tracking. Our control room and live room are designed for pristine capture with character.
+                    </p>
+                </article>
+                <article class="service-card reveal">
+
+                    <h3 class="service-card__title" data-i18n="service_mixing_title">Mixing</h3>
+                    <p class="service-card__desc" data-i18n="service_mixing_desc">Balancing art and precision. We shape your recordings into cohesive, powerful mixes that translate across every system.
+                    </p>
+                </article>
+                <article class="service-card reveal">
+
+                    <h3 class="service-card__title" data-i18n="service_mastering_title">Mastering</h3>
+                    <p class="service-card__desc" data-i18n="service_mastering_desc">The final polish. Loudness, clarity, and consistency — prepared for streaming, vinyl, or any format you need.
+                    </p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+        <div class="wave-divider wave-divider--to-bg" aria-hidden="true"></div>
+
+    <!-- ====== STUDIO ====== -->
+    <section class="section studio" id="studio">
+        <div class="container">
+            <div class="studio__content reveal">
+                <span class="section__label" data-i18n="label_studio">The Studio</span>
+                <h2 class="studio__heading" data-i18n-html="studio_heading">Two rooms.<br>One vision.</h2>
+                <div class="studio__details">
+                    <div class="studio__room">
+                        <h4 class="studio__room-title" data-i18n="studio_control_title">Control Room</h4>
+                        <p class="studio__room-desc" data-i18n="studio_control_desc">
+                            Precision monitoring, acoustically treated surfaces, and a workflow
+                            built for focus. Where every mix decision matters.
+                        </p>
+                    </div>
+                    <div class="studio__room">
+                        <h4 class="studio__room-title" data-i18n="studio_live_title">Live Room</h4>
+                        <p class="studio__room-desc" data-i18n="studio_live_desc">
+                            Natural reverb, proper isolation, and room to breathe.
+                            Designed for artists who want their sound captured honestly.
+                        </p>
+                    </div>
+                </div>
+                <p class="studio__credit" data-i18n-html="studio_credit">Studio design &amp; acoustic engineering by Christian Baumgarten (Smart Audio GmbH, Hamburg)</p>
+            </div>
+        </div>
+    </section>
+
+        <div class="wave-divider wave-divider--to-surface" aria-hidden="true"></div>
+
+    <!-- ====== GALLERY ====== -->
+    <section class="section gallery" id="gallery">
+        <div class="container">
+            <span class="section__label reveal" data-i18n="label_gallery">Gallery</span>
+            <div class="reveal"><div class="gallery__grid">
+                <figure class="gallery__item">
+                    <img src="images/gallery/IMG_8742.webp" alt="Live room overview — upright piano, burgundy carpet, acoustic panels and warm recessed lighting" class="gallery__img" width="1800" height="1350">
+                </figure>
+                <figure class="gallery__item">
+                    <img src="images/gallery/IMG_9117.webp" alt="Large diaphragm condenser microphone in the live room with burgundy acoustic ceiling" class="gallery__img" width="1800" height="2400">
+                </figure>
+                <figure class="gallery__item">
+                    <img src="images/gallery/IMG_9070.webp" alt="Engineer at the DAW during a mixing session" class="gallery__img" width="1800" height="1800">
+                </figure>
+                <figure class="gallery__item">
+                    <img src="images/gallery/IMG_9122.webp" alt="Austrian Audio microphone in the live room with piano and window to control room" class="gallery__img" width="1800" height="2674">
+                </figure>
+                <figure class="gallery__item">
+                    <img src="images/gallery/IMG_9140.webp" alt="Live room showing burgundy acoustic panels, wood ceiling, and window to the control room" class="gallery__img" width="1800" height="2400">
+                </figure>
+                <figure class="gallery__item">
+                    <img src="images/gallery/IMG_9513.webp" alt="Control room workstation — studio monitors, MIDI keyboard, and dual screens" class="gallery__img" width="1206" height="1206">
+                </figure>
+                <figure class="gallery__item">
+                    <img src="images/gallery/IMG_9496.webp" alt="Neumann small diaphragm condenser microphone close-up" class="gallery__img" width="1800" height="2400">
+                </figure>
+                <figure class="gallery__item">
+                    <img src="images/gallery/IMG_9123.webp" alt="Large condenser microphone macro shot in shockmount" class="gallery__img" width="1800" height="2400">
+                </figure>
+                <figure class="gallery__item">
+                    <img src="images/gallery/IMG_9078.webp" alt="Live room set up for recording — multiple microphone stands, piano, and burgundy accent wall" class="gallery__img" width="1800" height="2400">
+                </figure>
+                <figure class="gallery__item">
+                    <img src="images/gallery/IMG_9093.webp" alt="Live room wide angle — mic stands, cables, burgundy wall and acoustic treatment" class="gallery__img" width="1800" height="2400">
+                </figure>
+            </div></div>
+        </div>
+    </section>
+
+    <div class="wave-divider wave-divider--to-bg" aria-hidden="true"></div>
+
+    <!-- ====== LOCATION ====== -->
+    <section class="section location" id="location">
+        <div class="container">
+            <span class="section__label reveal" data-i18n="label_location">Location</span>
+            <div class="location__grid reveal">
                 <div class="location__map-wrap">
-                    <div id="map" class="location__map"></div>
+                    <iframe
+                        class="location__map"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d16566.983774891632!2d13.436500561641004!3d52.51283886491484!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47a84fd453d9ea19%3A0x584451f2ad2b6b09!2sResonance%20Studio%20Berlin!5e1!3m2!1sen!2sus!4v1775519729558!5m2!1sen!2sus"
+                        allowfullscreen=""
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Resonance Studio Berlin location"></iframe>
                 </div>
                 <div class="location__info">
-                    <address class="location__address">
+                    <address class="location__address" data-i18n-html="location_address">
                         Boxhagener Straße 18<br>
                         10245 Berlin<br>
-                        Hinterhof 2
+                        Hinterhof 2 / FG / B / 0<br>
                     </address>
-                    <p class="location__note">
-                        In the heart of Friedrichshain — a rare find for a recording studio in central Berlin.
+                    <p class="location__note" data-i18n="location_note">
+                        In the heart of Friedrichshain — a rare find
+                        for a recording studio in central Berlin.
+                        Steps from Frankfurter Tor and public transport.
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
+    <div class="wave-divider wave-divider--to-surface" aria-hidden="true"></div>
+
     <!-- ====== CONTACT & BOOKING ====== -->
-    <section class="section contact reveal" id="contact">
+    <section class="section contact" id="contact">
         <div class="container">
-            <h2 class="section__heading">Contact &amp; Booking</h2>
+            <span class="section__label reveal" data-i18n="label_contact">Contact &amp; Booking</span>
             <div class="contact__grid">
-                <div class="contact__form-wrap">
-                    <form
-                        action="https://formspree.io/f/YOUR_FORM_ID"
-                        method="POST"
-                        class="contact__form"
-                        id="contact-form"
-                    >
-                        <!-- Honeypot field — hidden from humans, traps bots -->
-                        <div class="form__honeypot" aria-hidden="true">
-                            <label for="website">Website</label>
-                            <input type="text" name="website" id="website" tabindex="-1" autocomplete="off">
+                <div class="contact__form-wrap reveal">
+                    <form class="contact__form" id="contact-form" novalidate>
+                        <!-- Honeypot (spam protection) -->
+                        <input type="hidden" name="botcheck" value="">
+
+                        <div class="form__group">
+                            <input type="text" name="name" id="name" class="form__input" placeholder=" " required>
+                            <label for="name" class="form__label" data-i18n="form_name">Name</label>
+                            <div class="form__line"></div>
                         </div>
 
                         <div class="form__group">
-                            <label for="name" class="form__label">Name</label>
-                            <input type="text" name="name" id="name" class="form__input" required>
+                            <input type="email" name="email" id="email" class="form__input" placeholder=" " required>
+                            <label for="email" class="form__label" data-i18n="form_email">Email</label>
+                            <div class="form__line"></div>
                         </div>
 
                         <div class="form__group">
-                            <label for="email" class="form__label">Email</label>
-                            <input type="email" name="email" id="email" class="form__input" required>
+                            <textarea name="message" id="message" class="form__input form__textarea" rows="5" placeholder=" " required></textarea>
+                            <label for="message" class="form__label" data-i18n="form_message">Message</label>
+                            <div class="form__line"></div>
                         </div>
 
-                        <div class="form__group">
-                            <label for="message" class="form__label">Message</label>
-                            <textarea name="message" id="message" class="form__input form__textarea" rows="5" required></textarea>
-                        </div>
-
-                        <button type="submit" class="form__button">Send Message</button>
+                        <button type="submit" class="form__button" id="form-button">
+                            <span class="form__button-text" data-i18n="form_send">Send Message</span>
+                            <svg class="form__button-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                            <svg class="form__button-spinner" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                                <path d="M12 2a10 10 0 0 1 10 10"></path>
+                            </svg>
+                        </button>
                     </form>
                     <p class="contact__status" id="form-status"></p>
                 </div>
-                <div class="contact__info">
-                    <p class="contact__cta">
-                        Interested in booking a session or have a question?<br>
-                        Reach out via the form or drop us an email.
+                <div class="contact__info reveal">
+                    <p class="contact__cta" data-i18n-html="contact_cta">
+                        Interested in booking a session<br>
+                        or have a question?
+                    </p>
+                    <p class="contact__detail" data-i18n="contact_detail">
+                        Reach out via the form or drop us an email directly.
                     </p>
                     <p class="contact__email" id="email-link">
                         <!-- Email inserted via JS to deter scrapers -->
                     </p>
+                    <div class="contact__social">
+                        <a href="https://www.instagram.com/resonancestudioberlin/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Resonance Studio Berlin on Instagram">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg>
+                            <span>resonancestudioberlin</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <div class="wave-divider wave-divider--to-bg" aria-hidden="true"></div>
+
     <!-- ====== FOOTER ====== -->
     <footer class="footer">
         <div class="container footer__inner">
-            <img
-                src="images/SRB-Logo-MH8b-full-beige.svg"
-                alt="Resonance Studio Berlin"
-                class="footer__logo"
-            >
-            <p class="footer__copy">&copy; 2026 Resonance Studio Berlin</p>
+            <span class="footer__copy"><span class="footer__copyright">&copy;</span> <span data-i18n="footer_copy">2026 Resonance Studio Berlin</span></span>
+            <nav class="footer__links">
+                <a href="legal.html" class="footer__link" data-i18n="footer_impressum">Legal Notice</a>
+                <span class="footer__sep">|</span>
+                <a href="privacy.html" class="footer__link" data-i18n="footer_privacy">Privacy Policy</a>
+            </nav>
         </div>
     </footer>
 
-    <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-            crossorigin=""></script>
+    </div><!-- /page-scroll -->
 
     <script src="main.js"></script>
+    <script src="lang-switcher.js"></script>
 </body>
 </html>
